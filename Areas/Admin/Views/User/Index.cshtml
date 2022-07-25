@@ -1,0 +1,89 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<QuanLyBanHang.Models.NhanVien>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid">
+        <h2>Quản lý nhân viên</h2>
+
+        <p>
+            @Html.ActionLink("Thêm nhân viên mới", "Create", "User", new {}, new { @class = "btn btn-primary" })
+
+        </p>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>
+                    Họ tên
+                </th>
+                <th>
+                    Tên tài khoản
+                </th>
+                <th>
+                    Mật khẩu
+                </th>
+                <th>
+                    Trạng thái
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Chức năng
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenTaiKhoan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatKhau)
+                    </td>
+                    @if (item.TrangThai == 0)
+                    {
+                        <td>
+                            Khóa
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            Đang hoạt động
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SDT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Xóa", "Delete", "User", new { id= item.ID }, new { onclick = "return confirm('Bạn thực sự muốn xóa bản ghi này?');" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <!-- Thêm mã phân trang -->
+        <br />
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page }))
+        <!-- Kết thúc -->
+
+    </div>
+</main>
