@@ -5,10 +5,9 @@ using System.Web;
 
 namespace QuanLyBanHang.DB.Entities
 {
-    public class Supplier
+    public class ProductType
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
     }
 }

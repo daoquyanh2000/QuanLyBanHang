@@ -4,15 +4,21 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-
+using System.Data.Entity;
+using QuanLyBanHang.DB;
+using QuanLyBanHang.DB.Entities;
 namespace QuanLyBanHang.Dao.DaoAdmin
 {
     public class LoginDao
     {
-        public static NhanVien GetUserByUserNamePassword(NhanVien model)
+        private StoreContext context;
+        public LoginDao(StoreContext context)
         {
-            string queryString = $"SELECT * FROM [NhanVien] WHERE TenTaiKhoan ='{model.TenTaiKhoan}' and MatKhau ='{model.MatKhau}'";
-            var user = Stuff.GetList<NhanVien>(queryString).FirstOrDefault();
+            this.context = context; 
+        }
+        public User GetUserByUserNamePassword(NhanVien model)
+        {
+            User user = this.context.Users.Where(x => x.UserName == model.TenTaiKhoan).FirstOrDefault();
             return user;
         }
     }

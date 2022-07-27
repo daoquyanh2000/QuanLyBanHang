@@ -1,5 +1,7 @@
 ﻿using QuanLyBanHang.Dao;
 using QuanLyBanHang.Dao.DaoAdmin;
+using QuanLyBanHang.DB;
+using QuanLyBanHang.DB.Entities;
 using QuanLyBanHang.Models;
 using System.Web.Mvc;
 
@@ -7,6 +9,8 @@ namespace QuanLyBanHang.Areas.admin.Controllers
 {
     public class LoginController : Controller
     {
+        static StoreContext context = new StoreContext();
+        private LoginDao loginDao = new LoginDao(context);
         // GET: Admin/Login
         [HttpGet]
         public ActionResult Index()
@@ -21,18 +25,17 @@ namespace QuanLyBanHang.Areas.admin.Controllers
         [HttpPost]
         public JsonResult Index(FormCollection fc)
         {
-            //kiem tra nguoi dung bam submit chua
             NhanVien UserLogin = new NhanVien();
             UserLogin.TenTaiKhoan = fc["TenTaiKhoan"].ToString();
             UserLogin.MatKhau = fc["MatKhau"].ToString();
-            NhanVien User = LoginDao.GetUserByUserNamePassword(UserLogin);
-            if (User!=null)
+            User user = loginDao.GetUserByUserNamePassword(UserLogin);
+            if (user!=null)
             {
-                if (User.TrangThai == 1)
+                if (user.Status == 1)
                 {
-                    Session["HoTenNV"] = User.HoTen;
-                    Session["TenTaiKhoanNV"] = User.TenTaiKhoan;
-                    Session["IDNV"] = User.ID;
+                    Session["HoTenNV"] = user.FullName;
+                    Session["TenTaiKhoanNV"] = user.UserName;
+                    Session["IDNV"] = user.Id;
                     return Json(new
                     {
                         status = true,

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 namespace QuanLyBanHang.DB.Entities
 {
-    public class Category
+    public class DeliveryEmployee
     {
+        [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public virtual List<Product> Products { get; set; }
+        public string FullName { get; set; }
+        public int Status { get; set; }
     }
 }

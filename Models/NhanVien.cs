@@ -27,9 +27,5 @@ namespace QuanLyBanHang.Models
         [Display(Name = "Số điện thoại")]
         public string SDT { get; set; }
         public string Email { get; set; }
-        public string NguoiTao { get; set; }
-        public string NgayTao { get; set; }
-        public string NgaySua { get; set; }
-        public string NguoiSua { get; set; }
     }
 }

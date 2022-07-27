@@ -142,12 +142,19 @@
     <Compile Include="Areas\Admin\adminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductTypesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dao\ConnectString.cs" />
     <Compile Include="Dao\DaoAdmin\LoginDao.cs" />
     <Compile Include="Dao\DaoAdmin\UserDao.cs" />
     <Compile Include="Dao\Stuff.cs" />
+    <Compile Include="DB\Entities\DeliveryEmployee.cs" />
+    <Compile Include="DB\Entities\ProductType.cs" />
+    <Compile Include="DB\Entities\Specification.cs" />
     <Compile Include="DB\StoreContext.cs" />
     <Compile Include="DB\Entities\Category.cs" />
     <Compile Include="DB\Entities\Image.cs" />
@@ -167,6 +174,18 @@
     <Compile Include="Migrations\202207271442401_InitialUser.cs" />
     <Compile Include="Migrations\202207271442401_InitialUser.designer.cs">
       <DependentUpon>202207271442401_InitialUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207271514299_Add_Status_To_User_Model.cs" />
+    <Compile Include="Migrations\202207271514299_Add_Status_To_User_Model.designer.cs">
+      <DependentUpon>202207271514299_Add_Status_To_User_Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207271804445_Init_remain_table.cs" />
+    <Compile Include="Migrations\202207271804445_Init_remain_table.designer.cs">
+      <DependentUpon>202207271804445_Init_remain_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207271820540_Update_Product.cs" />
+    <Compile Include="Migrations\202207271820540_Update_Product.designer.cs">
+      <DependentUpon>202207271820540_Update_Product.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\NhanVien.cs" />
@@ -200,6 +219,26 @@
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductTypes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Suppliers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Suppliers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Suppliers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Suppliers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Suppliers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -252,6 +291,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207271442401_InitialUser.resx">
       <DependentUpon>202207271442401_InitialUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207271514299_Add_Status_To_User_Model.resx">
+      <DependentUpon>202207271514299_Add_Status_To_User_Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207271804445_Init_remain_table.resx">
+      <DependentUpon>202207271804445_Init_remain_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207271820540_Update_Product.resx">
+      <DependentUpon>202207271820540_Update_Product.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

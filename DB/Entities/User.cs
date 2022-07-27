@@ -12,6 +12,7 @@ namespace QuanLyBanHang.DB.Entities
         public string Password { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
+        public int Status { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

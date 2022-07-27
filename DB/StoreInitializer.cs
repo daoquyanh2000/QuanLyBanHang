@@ -13,7 +13,6 @@ namespace QuanLyBanHang.DB
             {
                 new User{Id=1,Email="abc@gmail.com",FullName="admin",UserName="admin",Password="123",CreatedDate=DateTime.Now }
             };
-            base.Seed(context);
             foreach (User user in users)
             {
                 context.Users.Add(user);
