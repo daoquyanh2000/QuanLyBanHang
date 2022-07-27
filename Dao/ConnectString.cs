@@ -10,7 +10,7 @@ namespace QuanLyBanHang.Dao
     {
         public static string Setup()
         {
-            return ConfigurationManager.ConnectionStrings["qapc"].ConnectionString;
+            return ConfigurationManager.ConnectionStrings["StoreContext"].ConnectionString;
         }
     }
 }
