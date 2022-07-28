@@ -19,16 +19,16 @@ namespace QuanLyBanHang.DB.Entities
         [Display(Name = "Email")]
         public string Email { get; set; }
         [Display(Name = "Trạng thái")]
-        public Status Status { get; set; }
+        public UserStatus Status { get; set; }
         [Display(Name = "Ngày tạo")]
 
         public DateTime? CreatedDate { get; set; }
     }
-    public enum Status
+    public enum UserStatus
     {
             [Display(Name = "Khóa")]
             FirstValue=0,
             [Display(Name = "Mở")]
-            SecondValue=1
+            SecondValue=1,
     }
 }
