@@ -1,4 +1,4 @@
-﻿@model QuanLyBanHang.DB.Entities.User
+﻿@model QuanLyBanHang.DB.Entities.DeliveryEmployee
 
 @{
     ViewBag.Title = "Delete";
@@ -9,25 +9,9 @@
 
 <h3>Bạn thực sự muốn xóa?</h3>
 <div>
-    <h4>Nhân viên</h4>
+    <h4>Nhân viên giao hàng</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.FullName)
         </dt>
@@ -35,29 +19,12 @@
         <dd>
             @Html.DisplayFor(model => model.FullName)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Status)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
         </dd>
 
     </dl>
