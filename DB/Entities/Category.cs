@@ -10,6 +10,8 @@ namespace QuanLyBanHang.DB.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [ForeignKey("Product")]
+        public virtual List<int> ProductIds { get; set; }
         public virtual List<Product> Products { get; set; }
     }
 }

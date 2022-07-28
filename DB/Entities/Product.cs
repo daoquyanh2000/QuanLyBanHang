@@ -26,5 +26,6 @@ namespace QuanLyBanHang.DB.Entities
         [ForeignKey("Image")]
         public virtual List<int> ImageId { get; set; }
         public virtual List<Image> Images { get; set; }
+        public int Stock { get; set; }
     }
 }
