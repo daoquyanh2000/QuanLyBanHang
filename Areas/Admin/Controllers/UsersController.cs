@@ -22,7 +22,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             int pageNumber = (page ?? 1);
             page = (page ?? 1);
             int pageSizeNumber = 4;
-            var user = db.Users.Where(x => x.Status == 1).ToList().ToPagedList(pageNumber, pageSizeNumber);
+            var user = db.Users.ToList().ToPagedList(pageNumber, pageSizeNumber);
             return View(user);
         }
 
@@ -46,12 +46,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // GET: Admin/Users/Create
         public ActionResult Create()
         {
-            var data = new List<SelectListItem>{
-                 new SelectListItem{ Value="0",Text="Khóa"},
-                 new SelectListItem{ Value="1",Text="Mở"},
-             };
-            ViewBag.listSelectItem = data;
-
             return View();
         }
 
@@ -64,6 +58,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.CreatedDate = DateTime.Now;
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -13,73 +13,76 @@
         <p>
             @Html.ActionLink("Tạo mới", "Create")
         </p>
-        <table class="table">
-            <tr>
-                <th>
-            
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Password)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FullName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreatedDate)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        <div class="table-responsive">
+            <table class="table table-responsive">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Password)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    @if (item.Status == 0)
-                    {
-                        <td>
-                            Khóa
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            Đang hoạt động
-                        </td>
-                    }
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedDate)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
-                    </td>
+                    <th>
+
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th></th>
                 </tr>
-            }
 
-        </table>
-        <!-- Thêm mã phân trang -->
-        <br />
-        Trang @(pagedlist.PageCount < pagedlist.PageNumber ? 0 : pagedlist.PageNumber) / @pagedlist.PageCount
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        @if (item.Status == 0)
+                        {
+                            <td>
+                                Khóa
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Đang hoạt động
+                            </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
 
-        @Html.PagedListPager(pagedlist, page => Url.Action("Index",
-            new { page }))
-        <!-- Kết thúc -->
+            </table>
+            <!-- Thêm mã phân trang -->
+            <br />
+            Trang @(pagedlist.PageCount < pagedlist.PageNumber ? 0 : pagedlist.PageNumber) / @pagedlist.PageCount
+
+            @Html.PagedListPager(pagedlist, page => Url.Action("Index",
+                new { page }))
+            <!-- Kết thúc -->
+
+        </div>

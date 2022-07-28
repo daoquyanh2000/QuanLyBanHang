@@ -31,7 +31,7 @@ namespace QuanLyBanHang.Areas.admin.Controllers
             User user = loginDao.GetUserByUserNamePassword(UserLogin);
             if (user!=null)
             {
-                if (user.Status == 1)
+                if (user.Status ==Status.SecondValue)
                 {
                     Session["HoTenNV"] = user.FullName;
                     Session["TenTaiKhoanNV"] = user.UserName;

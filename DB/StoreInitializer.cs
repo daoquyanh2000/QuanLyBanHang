@@ -11,7 +11,7 @@ namespace QuanLyBanHang.DB
         {
             var users = new List<User>
             {
-                new User{Id=1,Email="abc@gmail.com",FullName="admin",UserName="admin",Password="123",CreatedDate=DateTime.Now }
+                new User{Id=1,Email="abc@gmail.com",FullName="admin",UserName="tkadmin",Password="123456",CreatedDate=DateTime.Now,Status = Status.SecondValue }
             };
             foreach (User user in users)
             {

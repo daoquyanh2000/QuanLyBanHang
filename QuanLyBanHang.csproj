@@ -187,6 +187,10 @@
     <Compile Include="Migrations\202207271820540_Update_Product.designer.cs">
       <DependentUpon>202207271820540_Update_Product.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207281636540_EmptyMigration.cs" />
+    <Compile Include="Migrations\202207281636540_EmptyMigration.designer.cs">
+      <DependentUpon>202207281636540_EmptyMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -300,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207271820540_Update_Product.resx">
       <DependentUpon>202207271820540_Update_Product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207281636540_EmptyMigration.resx">
+      <DependentUpon>202207281636540_EmptyMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
