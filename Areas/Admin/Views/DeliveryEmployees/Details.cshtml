@@ -1,4 +1,4 @@
-﻿@model QuanLyBanHang.DB.Entities.Supplier
+﻿@model QuanLyBanHang.DB.Entities.DeliveryEmployee
 
 @{
     ViewBag.Title = "Details";
@@ -8,23 +8,23 @@
 <h2>Chi tiết</h2>
 
 <div>
-    <h4>Nhà cung cấp</h4>
+    <h4>Nhân viên giao hàng</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.FullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.FullName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Status)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.Status)
         </dd>
 
     </dl>
