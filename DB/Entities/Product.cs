@@ -20,11 +20,7 @@ namespace QuanLyBanHang.DB.Entities
         public virtual Supplier Supplier { get; set; }
         public string Origin { get; set; }
         public string Info { get; set; }
-        [ForeignKey("Category")]
-        public virtual List<int> CategoryIds { get; set; }
         public virtual List<Category> Categories { get; set; }
-        [ForeignKey("Image")]
-        public virtual List<int> ImageId { get; set; }
         public virtual List<Image> Images { get; set; }
         public int Stock { get; set; }
     }
