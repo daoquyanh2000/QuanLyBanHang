@@ -139,23 +139,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\adminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\DeliveryEmployeesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\CategoriesProducts.cs" />
+    <Compile Include="Areas\Admin\Models\CreateCategoryDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dao\ConnectString.cs" />
     <Compile Include="Dao\DaoAdmin\LoginDao.cs" />
     <Compile Include="Dao\DaoAdmin\UserDao.cs" />
     <Compile Include="Dao\Stuff.cs" />
+    <Compile Include="DB\Entities\Customer.cs" />
     <Compile Include="DB\Entities\DeliveryEmployee.cs" />
+    <Compile Include="DB\Entities\ProductCategory.cs" />
     <Compile Include="DB\Entities\ProductType.cs" />
-    <Compile Include="DB\Entities\Specification.cs" />
     <Compile Include="DB\StoreContext.cs" />
     <Compile Include="DB\Entities\Category.cs" />
     <Compile Include="DB\Entities\Image.cs" />
@@ -203,6 +207,14 @@
     <Compile Include="Migrations\202207281805104_categories.cs" />
     <Compile Include="Migrations\202207281805104_categories.designer.cs">
       <DependentUpon>202207281805104_categories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207291854171_customer.cs" />
+    <Compile Include="Migrations\202207291854171_customer.designer.cs">
+      <DependentUpon>202207291854171_customer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207292153478_new.cs" />
+    <Compile Include="Migrations\202207292153478_new.designer.cs">
+      <DependentUpon>202207292153478_new.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\NhanVien.cs" />
@@ -268,6 +280,16 @@
     <Content Include="Areas\Admin\Views\DeliveryEmployees\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Enum.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -341,6 +363,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207281805104_categories.resx">
       <DependentUpon>202207281805104_categories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207291854171_customer.resx">
+      <DependentUpon>202207291854171_customer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207292153478_new.resx">
+      <DependentUpon>202207292153478_new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

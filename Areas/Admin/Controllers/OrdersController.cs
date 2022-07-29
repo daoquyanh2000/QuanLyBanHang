@@ -8,128 +8,117 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
-using QuanLyBanHang.Areas.Admin.Models;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
-    public class CategoriesController : Controller
+    public class OrdersController : Controller
     {
         private StoreContext db = new StoreContext();
 
-        // GET: Admin/Categories
+        // GET: Admin/Orders
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            var orders = db.Orders.Include(o => o.Customer);
+            return View(orders.ToList());
         }
 
-        // GET: Admin/Categories/Details/5
+        // GET: Admin/Orders/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(order);
         }
 
-        // GET: Admin/Categories/Create
+        // GET: Admin/Orders/Create
         public ActionResult Create()
         {
-            var products = db.Products.ToList();
-            ViewBag.products = products;
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FullName");
             return View();
         }
 
-        // POST: Admin/Categories/Create
+        // POST: Admin/Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ProductIds")] CreateCategoryDto categoryDto)
+        public ActionResult Create([Bind(Include = "Id,CreatedTime,Status,CustomerId,Total")] Order order)
         {
             if (ModelState.IsValid)
             {
-                var products = db.Products.Where(x => categoryDto.ProductIds.Contains(x.Id)).ToList();
-                var category = new Category() { Id = 0, Name = categoryDto.Name, Products = products };
-                db.Entry(category).State = EntityState.Added;
-                db.Categories.Add(category);
+                db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(categoryDto);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FullName", order.CustomerId);
+            return View(order);
         }
 
-        // GET: Admin/Categories/Edit/5
+        // GET: Admin/Orders/Edit/5
         public ActionResult Edit(int? id)
         {
-            GetAllProducts();
-            var products = db.Products.ToList();
-            ViewBag.products = products;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FullName", order.CustomerId);
+            return View(order);
         }
 
-        // POST: Admin/Categories/Edit/5
+        // POST: Admin/Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ProductIds")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,CreatedTime,Status,CustomerId,Total")] Order order)
         {
-            GetAllProducts();
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FullName", order.CustomerId);
+            return View(order);
         }
 
-        // GET: Admin/Categories/Delete/5
+        // GET: Admin/Orders/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(order);
         }
 
-        // POST: Admin/Categories/Delete/5
+        // POST: Admin/Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
+            Order order = db.Orders.Find(id);
+            db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        private void GetAllProducts()
-        {
-            var products = db.Products.ToList();
-            ViewBag.Products = products;
         }
 
         protected override void Dispose(bool disposing)

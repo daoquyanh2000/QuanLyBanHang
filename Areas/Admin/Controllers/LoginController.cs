@@ -4,13 +4,13 @@ using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
 using QuanLyBanHang.Models;
 using System.Web.Mvc;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace QuanLyBanHang.Areas.admin.Controllers
 {
     public class LoginController : Controller
     {
-        static StoreContext context = new StoreContext();
-        private LoginDao loginDao = new LoginDao(context);
+        private StoreContext db = new StoreContext();
         // GET: Admin/Login
         [HttpGet]
         public ActionResult Index()
@@ -28,7 +28,7 @@ namespace QuanLyBanHang.Areas.admin.Controllers
             NhanVien UserLogin = new NhanVien();
             UserLogin.TenTaiKhoan = fc["TenTaiKhoan"].ToString();
             UserLogin.MatKhau = fc["MatKhau"].ToString();
-            User user = loginDao.GetUserByUserNamePassword(UserLogin);
+            User user = db.Users.Where(u => u.UserName == UserLogin.TenTaiKhoan && u.Password == UserLogin.MatKhau).FirstOrDefault();
             if (user!=null)
             {
                 if (user.Status == UserStatus.SecondValue)

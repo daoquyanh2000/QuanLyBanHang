@@ -70,4 +70,8 @@ label.error {
 th, td {
     word-break: keep-all;
     white-space: nowrap;
+    vertical-align: middle;
+}
+th{
+    text-align:center;
 }
