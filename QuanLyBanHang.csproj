@@ -148,14 +148,16 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\CategoriesProducts.cs" />
+    <Compile Include="Areas\Admin\Models\CreateCategoryDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dao\ConnectString.cs" />
     <Compile Include="Dao\DaoAdmin\LoginDao.cs" />
     <Compile Include="Dao\DaoAdmin\UserDao.cs" />
     <Compile Include="Dao\Stuff.cs" />
+    <Compile Include="DB\Entities\Customer.cs" />
     <Compile Include="DB\Entities\DeliveryEmployee.cs" />
+    <Compile Include="DB\Entities\ProductCategory.cs" />
     <Compile Include="DB\Entities\ProductType.cs" />
-    <Compile Include="DB\Entities\Specification.cs" />
     <Compile Include="DB\StoreContext.cs" />
     <Compile Include="DB\Entities\Category.cs" />
     <Compile Include="DB\Entities\Image.cs" />

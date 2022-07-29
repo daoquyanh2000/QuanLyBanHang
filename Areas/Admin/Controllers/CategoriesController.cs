@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
+using QuanLyBanHang.Areas.Admin.Models;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
@@ -49,19 +50,19 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ProductIds")] Category category)
+        public ActionResult Create([Bind(Include = "Id,Name,ProductIds")] CreateCategoryDto categoryDto)
         {
             if (ModelState.IsValid)
             {
-                var products = db.Products.Where(x => category.ProductIds.Contains(x.Id)).ToList();
-                category.Products = products;
+                var products = db.Products.Where(x => categoryDto.ProductIds.Contains(x.Id)).ToList();
+                var category = new Category() { Id = 0, Name = categoryDto.Name, Products = products };
                 db.Entry(category).State = EntityState.Added;
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(categoryDto);
         }
 
         // GET: Admin/Categories/Edit/5

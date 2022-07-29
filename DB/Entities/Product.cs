@@ -6,6 +6,10 @@ namespace QuanLyBanHang.DB.Entities
 {
     public class Product
     {
+        public Product()
+        {
+            this.Categories = new HashSet<Category>();
+        }
         public int Id { get; set; }
         public string Title { get; set; }
         public string Code { get; set; }
@@ -20,8 +24,9 @@ namespace QuanLyBanHang.DB.Entities
         public virtual Supplier Supplier { get; set; }
         public string Origin { get; set; }
         public string Info { get; set; }
-        public virtual List<Category> Categories { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
         public virtual List<Image> Images { get; set; }
         public int Stock { get; set; }
+        public string Specification { get; set; }
     }
 }

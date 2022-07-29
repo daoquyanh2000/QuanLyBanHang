@@ -122,19 +122,7 @@
                         Weight = c.Single(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.ProductCategory",
-                c => new
-                    {
-                        Product_Id = c.Int(nullable: false),
-                        Category_Id = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Product_Id, t.Category_Id })
-                .ForeignKey("dbo.Product", t => t.Product_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Category", t => t.Category_Id, cascadeDelete: true)
-                .Index(t => t.Product_Id)
-                .Index(t => t.Category_Id);
+           
             
         }
         
