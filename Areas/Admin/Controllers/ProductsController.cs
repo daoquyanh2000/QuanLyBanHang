@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using QuanLyBanHang.Areas.Admin.Models;
 using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
 
@@ -54,15 +55,17 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Product product)
+        public ActionResult Create(Product product)
         {
-            string pathFolder = "/App_Data/Upload/";
+            string pathFolder = "/Assets/Admin/image/";
             if (!Directory.Exists(pathFolder))
             {
                 Directory.CreateDirectory(Server.MapPath(pathFolder));
             }
             if (ModelState.IsValid)
             {
+                var selectedImageId = product.SelectedImage;
+
                 List<Image> images = new List<Image>();
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
@@ -75,13 +78,22 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                         file.SaveAs(path);
                         Image image = new Image()
                         {
-                            ImageName = fileName,
+                            ImageName = file.FileName,
                             ImageUrl = pathFolder + fileName,
                         };
+                        if (selectedImageId == i)
+                        {
+                            image.IsPrimary = true;
+                        }
                         images.Add(image);
                     }
                 }
                 product.Images = images;
+                //set the first image is primary
+                if (selectedImageId == null)
+                {
+                    product.Images.FirstOrDefault().IsPrimary = true;
+                }
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -99,6 +111,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
+            Image selectedIamge = db.Images.Where(i => i.IsPrimary == true && i.ProductId==id).FirstOrDefault();
             if (product == null)
             {
                 return HttpNotFound();
@@ -115,13 +128,15 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Product product)
         {
-            string pathFolder = "/App_Data/Upload/";
+            string pathFolder = "/Assets/Admin/image/";
             if (!Directory.Exists(pathFolder))
             {
                 Directory.CreateDirectory(Server.MapPath(pathFolder));
             }
             if (ModelState.IsValid)
             {
+                var selectedImageId = product.SelectedImage;
+                //in case of upload new image
                 List<Image> images = new List<Image>();
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
@@ -135,13 +150,23 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
 
                         Image image = new Image()
                         {
-                            ImageName = fileName,
-                            ImageUrl = pathFolder+ fileName,
+                            ImageName = file.FileName,
+                            ImageUrl = pathFolder + fileName,
                         };
                         images.Add(image);
+                        if (selectedImageId == i)
+                        {
+                            image.IsPrimary = true;
+                        }
                     }
+
                 }
+
                 product.Images = images;
+                if (selectedImageId == null)
+                {
+                    product.Images.FirstOrDefault().IsPrimary = true;
+                }
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

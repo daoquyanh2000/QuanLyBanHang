@@ -45,6 +45,8 @@ namespace QuanLyBanHang.DB.Entities
         public int SupplierId { get; set; }
         public virtual Supplier Supplier { get; set; }
 
+
+        public int? SelectedImage { get; set; }
         public virtual ICollection<Image> Images { get; set; }
 
     }

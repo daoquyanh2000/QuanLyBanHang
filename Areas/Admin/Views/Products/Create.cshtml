@@ -100,7 +100,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-10">
-                <table class="table" id="selectMainImage">
+                <table class="table" id="tableImage">
 
                     <tr>
                         <th>
@@ -121,7 +121,7 @@
                             123123123
                         </td>
                         <td style="text-align:center;">
-                            <input type="radio" name="selectMainImage">
+                            <input type="radio" name="radioImage">
 
                         </td>
                     </tr>
@@ -157,9 +157,36 @@
 }
 <script>
     $('#inputImage').on('change', function () {
+        let html = `
+                    <tr>
+                        <th>
+                            Tên ảnh
+                        </th>
+                        <th>
+                            Ảnh
+                        </th>
+                        <th>
+                            Chọn ảnh chính
+                        </th>
+                    </tr>`;
+
+
         files = $(this)[0].files;
-        for (let file of files) {
-            console.log(file);
+        for (let i = 0; i < files.length;i++) {
+            let url =URL.createObjectURL(files[i]);
+            html += `
+                    <tr>
+                        <td>
+                            ${files[i].name}
+                        </td>
+                        <td>
+                            <img src="${url}" alt="Alternate Text" style="width:100px" />
+                        </td>
+                        <td>
+                            <input type="radio" name="SelectedImage" value="${i}">
+                        </td>
+                    </tr>`
         }
+        $('#tableImage').html(html);
     })
 </script>
