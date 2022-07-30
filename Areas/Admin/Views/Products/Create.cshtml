@@ -157,36 +157,9 @@
 }
 <script>
     $('#inputImage').on('change', function () {
-        let html = `
-                    <tr>
-                        <th>
-                            Tên ảnh
-                        </th>
-                        <th>
-                            Ảnh
-                        </th>
-                        <th>
-                            Chọn ảnh chính
-                        </th>
-                    </tr>`;
-
-
         files = $(this)[0].files;
         for (let file of files) {
-            let url =URL.createObjectURL(file);
-            html += `
-                    <tr>
-                        <td>
-                            ${file.Name}
-                        </td>
-                        <td>
-                            <img src="${url}" alt="Alternate Text" style="width:100px" />
-                        </td>
-                        <td>
-                            <input type="radio" name="tableImage">
-                        </td>
-                    </tr>`
+            console.log(file);
         }
-        $('#selectMainImage').html(html);
     })
 </script>

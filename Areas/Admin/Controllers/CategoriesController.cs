@@ -75,7 +75,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             GetAllProducts();
             var products = db.Products.ToList();
             ViewBag.products = products;
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

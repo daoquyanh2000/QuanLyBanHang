@@ -8,7 +8,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using QuanLyBanHang.Areas.Admin.Models;
 using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
 
@@ -55,9 +54,9 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product)
+        public ActionResult Create( Product product)
         {
-            string pathFolder = "/Assets/Admin/image/";
+            string pathFolder = "/App_Data/Upload/";
             if (!Directory.Exists(pathFolder))
             {
                 Directory.CreateDirectory(Server.MapPath(pathFolder));
@@ -76,7 +75,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                         file.SaveAs(path);
                         Image image = new Image()
                         {
-                            ImageName = file.FileName,
+                            ImageName = fileName,
                             ImageUrl = pathFolder + fileName,
                         };
                         images.Add(image);
@@ -100,12 +99,10 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
-            Image selectedIamge = db.Images.Where(i => i.IsPrimary == true).FirstOrDefault();
             if (product == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.SelectedImage = selectedIamge;
             ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "ID", "Name", product.ProductTypeId);
             ViewBag.SupplierId = new SelectList(db.Suppliers, "Id", "Name", product.SupplierId);
             return View(product);
@@ -118,9 +115,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Product product)
         {
-            string pathFolder = "/Assets/Admin/image/";
-
-
+            string pathFolder = "/App_Data/Upload/";
             if (!Directory.Exists(pathFolder))
             {
                 Directory.CreateDirectory(Server.MapPath(pathFolder));
@@ -140,8 +135,8 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
 
                         Image image = new Image()
                         {
-                            ImageName = file.FileName,
-                            ImageUrl = pathFolder + fileName,
+                            ImageName = fileName,
+                            ImageUrl = pathFolder+ fileName,
                         };
                         images.Add(image);
                     }
