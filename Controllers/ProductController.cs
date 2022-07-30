@@ -19,11 +19,11 @@ namespace QuanLyBanHang.Controllers
             List<Product> products;
             if(ProductTypeId != null)
             {
-                products = db.Products.Where(product => product.ProductTypeId == ProductTypeId).ToPagedList(PageNumber, PageSize).ToList();
+                products = db.Products.Where(product => product.ProductTypeId == ProductTypeId).ToList();
             }
             else
             {
-                products = db.Products.ToPagedList(PageNumber, PageSize).ToList();
+                products = db.Products.ToList();
             }
             return View(products);
         }
