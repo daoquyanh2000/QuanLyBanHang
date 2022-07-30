@@ -1,0 +1,11 @@
+﻿@model IEnumerable<QuanLyBanHang.DB.Entities.ProductType>
+<div class="sidebar__item">
+    <h4>Department</h4>
+    <ul>
+        @{ foreach (var type in Model)
+            {
+                <li><a href="/Product?ProductTypeId=@type.ID">@type.Name</a></li>
+            }
+        }
+    </ul>
+</div>

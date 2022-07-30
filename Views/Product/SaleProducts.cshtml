@@ -1,0 +1,22 @@
+﻿@model List<QuanLyBanHang.DB.Entities.Product>
+
+@{ foreach (var product in Model)
+    {
+        <div class="col-lg-4">
+            <div class="product__discount__item">
+                <div class="product__discount__item__pic set-bg"
+                     data-setbg="@product.Images.First().ImageUrl">
+                    <div class="product__discount__percent">@product.Discount%</div>
+                    <ul class="product__item__pic__hover">
+                        <li><a href="/Product/@product.Id}"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product__discount__item__text">
+                    <span>@product.Title</span>
+                    <h5><a href="#">@product.Info</a></h5>
+                    <div class="product__item__price">@{(product.Price * (1 - product.Discount / 100)).ToString();}<span></span></div>
+                </div>
+            </div>
+        </div>
+    }
+}

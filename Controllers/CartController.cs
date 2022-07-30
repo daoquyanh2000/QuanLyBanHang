@@ -25,8 +25,21 @@ namespace QuanLyBanHang.Controllers
         }
         public ActionResult PartialCart()
         {
-
-            return View();
+            var cart = Session[CartSession];
+            var partialCart = new PartialCart();
+            if(cart != null) {
+                var list = (List<CartItem>)cart;
+                var totalMoney = list.Sum(item => item.Quantity * item.Price);
+                var totalItem = list.Count;
+                partialCart.TotalItem = totalItem;
+                partialCart.TotalMoney = totalMoney;
+            }
+            else
+            {
+                partialCart.TotalMoney = 0;
+                partialCart.TotalItem = 0;
+            }
+            return PartialView(partialCart);
         }
         public ActionResult AddItem(int ProductId,int quantity)
         {
