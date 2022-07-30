@@ -335,13 +335,11 @@
     <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Areas\Admin\Views\Images\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Images\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Images\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Images\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Images\Index.cshtml" />
-=======
     <Content Include="Assets\Client\fonts\ElegantIcons.eot" />
     <Content Include="Assets\Client\fonts\ElegantIcons.ttf" />
     <Content Include="Assets\Client\fonts\ElegantIcons.woff" />
@@ -369,7 +367,6 @@
     <Content Include="Assets\Client\sass\_shoping-cart.scss" />
     <Content Include="Assets\Client\sass\_sidebar.scss" />
     <Content Include="Assets\Client\sass\_variable.scss" />
->>>>>>> 30f5b52cecad88eb4375df1fbc2df57d27a112bd
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
