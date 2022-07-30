@@ -44,7 +44,6 @@ namespace QuanLyBanHang.DB.Entities
         [Display(Name = "Nhà cung cấp")]
         public int SupplierId { get; set; }
         public virtual Supplier Supplier { get; set; }
-
         public virtual ICollection<Image> Images { get; set; }
 
     }
