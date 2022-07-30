@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
 using QuanLyBanHang.Areas.Admin.Models;
+using PagedList;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
@@ -17,9 +18,12 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Admin/Categories
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Categories.ToList());
+            int pageNumber = (page ?? 1);
+            int pageSizeNumber = 4;
+            var paged = db.Categories.ToList().ToPagedList(pageNumber, pageSizeNumber);
+            return View(paged);
         }
 
         // GET: Admin/Categories/Details/5

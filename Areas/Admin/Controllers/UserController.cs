@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
+    
     public class UserController : Controller
     {
         // GET: Admin/User
