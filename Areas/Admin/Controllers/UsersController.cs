@@ -20,7 +20,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         public ActionResult Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            page = (page ?? 1);
             int pageSizeNumber = 4;
             var user = db.Users.ToList().ToPagedList(pageNumber, pageSizeNumber);
             return View(user);

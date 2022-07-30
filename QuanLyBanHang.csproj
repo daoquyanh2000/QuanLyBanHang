@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,10 +52,10 @@
       <HintPath>packages\Dapper.Contrib.2.0.78\lib\net461\Dapper.Contrib.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -172,49 +171,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207271438094_InitialCreate.cs" />
-    <Compile Include="Migrations\202207271438094_InitialCreate.designer.cs">
-      <DependentUpon>202207271438094_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207271442401_InitialUser.cs" />
-    <Compile Include="Migrations\202207271442401_InitialUser.designer.cs">
-      <DependentUpon>202207271442401_InitialUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207271514299_Add_Status_To_User_Model.cs" />
-    <Compile Include="Migrations\202207271514299_Add_Status_To_User_Model.designer.cs">
-      <DependentUpon>202207271514299_Add_Status_To_User_Model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207271804445_Init_remain_table.cs" />
-    <Compile Include="Migrations\202207271804445_Init_remain_table.designer.cs">
-      <DependentUpon>202207271804445_Init_remain_table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207271820540_Update_Product.cs" />
-    <Compile Include="Migrations\202207271820540_Update_Product.designer.cs">
-      <DependentUpon>202207271820540_Update_Product.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207281636540_EmptyMigration.cs" />
-    <Compile Include="Migrations\202207281636540_EmptyMigration.designer.cs">
-      <DependentUpon>202207281636540_EmptyMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207281707187_List_Product_Category.cs" />
-    <Compile Include="Migrations\202207281707187_List_Product_Category.designer.cs">
-      <DependentUpon>202207281707187_List_Product_Category.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207281723488_Constraint_OrderDetail_Product.cs" />
-    <Compile Include="Migrations\202207281723488_Constraint_OrderDetail_Product.designer.cs">
-      <DependentUpon>202207281723488_Constraint_OrderDetail_Product.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207281805104_categories.cs" />
-    <Compile Include="Migrations\202207281805104_categories.designer.cs">
-      <DependentUpon>202207281805104_categories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207291854171_customer.cs" />
-    <Compile Include="Migrations\202207291854171_customer.designer.cs">
-      <DependentUpon>202207291854171_customer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202207292153478_new.cs" />
-    <Compile Include="Migrations\202207292153478_new.designer.cs">
-      <DependentUpon>202207292153478_new.cs</DependentUpon>
+    <Compile Include="Migrations\202207301056574_createDb.cs" />
+    <Compile Include="Migrations\202207301056574_createDb.Designer.cs">
+      <DependentUpon>202207301056574_createDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\NhanVien.cs" />
@@ -290,6 +249,11 @@
     <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Images\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Images\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Images\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Images\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Images\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -337,38 +301,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207271438094_InitialCreate.resx">
-      <DependentUpon>202207271438094_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207271442401_InitialUser.resx">
-      <DependentUpon>202207271442401_InitialUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207271514299_Add_Status_To_User_Model.resx">
-      <DependentUpon>202207271514299_Add_Status_To_User_Model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207271804445_Init_remain_table.resx">
-      <DependentUpon>202207271804445_Init_remain_table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207271820540_Update_Product.resx">
-      <DependentUpon>202207271820540_Update_Product.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207281636540_EmptyMigration.resx">
-      <DependentUpon>202207281636540_EmptyMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207281707187_List_Product_Category.resx">
-      <DependentUpon>202207281707187_List_Product_Category.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207281723488_Constraint_OrderDetail_Product.resx">
-      <DependentUpon>202207281723488_Constraint_OrderDetail_Product.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207281805104_categories.resx">
-      <DependentUpon>202207281805104_categories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207291854171_customer.resx">
-      <DependentUpon>202207291854171_customer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202207292153478_new.resx">
-      <DependentUpon>202207292153478_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207301056574_createDb.resx">
+      <DependentUpon>202207301056574_createDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -403,11 +337,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -8,25 +8,51 @@ namespace QuanLyBanHang.DB.Entities
     {
         public Product()
         {
-            this.Categories = new HashSet<Category>();
+            Categories = new HashSet<Category>();
         }
         public int Id { get; set; }
+
+        [Display(Name = "Tên")]
         public string Title { get; set; }
+        [Display(Name = "Mã")]
         public string Code { get; set; }
+        [Display(Name = "Giá")]
         public long Price { get; set; }
-        public int Status { get; set; }
+        [Display(Name = "Trạng thái")]
+        public ProductStatus Status { get; set; }
+        [Display(Name = "Giảm giá")]
         public int Discount { get; set; }
+
+
+        [Display(Name = "Xuất xứ")]
+        public string Origin { get; set; }
+        [Display(Name = "Thông tin")]
+        public string Info { get; set; }
+        [Display(Name = "Trong kho")]
+        public int Stock { get; set; }
+        [Display(Name = "Thông số")]
+        public string Specification { get; set; }
+        [Display(Name = "Danh mục")]
+        public virtual ICollection<Category> Categories { get; set; }
+
         [ForeignKey("ProductType")]
+        [Display(Name = "Loại sản phẩm")]
         public int ProductTypeId { get; set; }
         public virtual ProductType ProductType { get; set; }
+
         [ForeignKey("Supplier")]
+        [Display(Name = "Nhà cung cấp")]
         public int SupplierId { get; set; }
         public virtual Supplier Supplier { get; set; }
-        public string Origin { get; set; }
-        public string Info { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
-        public virtual List<Image> Images { get; set; }
-        public int Stock { get; set; }
-        public string Specification { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
+
+    }
+    public enum ProductStatus
+    {
+        [Display(Name = "Vô hiệu hóa")]
+        FirstValue = 0,
+        [Display(Name = "Đang hoạt động")]
+        SecondValue = 1,
     }
 }

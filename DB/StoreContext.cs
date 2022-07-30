@@ -7,7 +7,8 @@ namespace QuanLyBanHang.DB
     {
         public StoreContext() : base("StoreContext")
         {
-
+            var initializer = new DropCreateDatabaseAlways<StoreContext>();
+            Database.SetInitializer(initializer);
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }

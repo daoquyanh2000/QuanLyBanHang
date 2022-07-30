@@ -10,9 +10,10 @@ namespace QuanLyBanHang.DB.Entities
     {
         public Category()
         {
-            this.Products = new HashSet<Product>();
+            Products = new HashSet<Product>();
         }
         public int Id { get; set; }
+        [Display(Name = "Tên danh mục")]
         public string Name { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
