@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -55,7 +56,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product,int? selectedImage)
         {
             string pathFolder = "/Assets/Admin/image/";
             if (!Directory.Exists(pathFolder))
@@ -64,8 +65,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                var selectedImageId = product.SelectedImage;
-
                 List<Image> images = new List<Image>();
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
@@ -81,7 +80,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                             ImageName = file.FileName,
                             ImageUrl = pathFolder + fileName,
                         };
-                        if (selectedImageId == i)
+                        if (selectedImage == i)
                         {
                             image.IsPrimary = true;
                         }
@@ -90,7 +89,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 }
                 product.Images = images;
                 //set the first image is primary
-                if (selectedImageId == null)
+                if (selectedImage == null && images.Count>0)
                 {
                     product.Images.FirstOrDefault().IsPrimary = true;
                 }
@@ -128,51 +127,21 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Product product)
         {
+            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "ID", "Name", product.ProductTypeId);
+            ViewBag.SupplierId = new SelectList(db.Suppliers, "Id", "Name", product.SupplierId);
             string pathFolder = "/Assets/Admin/image/";
             if (!Directory.Exists(pathFolder))
             {
                 Directory.CreateDirectory(Server.MapPath(pathFolder));
             }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
-                var selectedImageId = product.SelectedImage;
-                //in case of upload new image
-                List<Image> images = new List<Image>();
-                for (int i = 0; i < Request.Files.Count; i++)
-                {
-                    var file = Request.Files[i];
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        var fileName = DateTime.Now.ToString() + "_" + Path.GetFileName(file.FileName);
-                        //save file
-                        var path = Path.Combine(pathFolder, fileName);
-                        file.SaveAs(path);
-
-                        Image image = new Image()
-                        {
-                            ImageName = file.FileName,
-                            ImageUrl = pathFolder + fileName,
-                        };
-                        images.Add(image);
-                        if (selectedImageId == i)
-                        {
-                            image.IsPrimary = true;
-                        }
-                    }
-
-                }
-
-                product.Images = images;
-                if (selectedImageId == null)
-                {
-                    product.Images.FirstOrDefault().IsPrimary = true;
-                }
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProductTypeId = new SelectList(db.ProductTypes, "ID", "Name", product.ProductTypeId);
-            ViewBag.SupplierId = new SelectList(db.Suppliers, "Id", "Name", product.SupplierId);
+
             return View(product);
         }
 
@@ -190,11 +159,55 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             return View(product);
         }
-        [HttpPost]
         //delete product image
-        public JsonResult DeleteFile(string id)
+        [HttpPost]
+        public ActionResult ChangePrimaryImage( int productId,int imageId)
         {
-            if (String.IsNullOrEmpty(id))
+            Product product = db.Products.Find(productId);
+                return Json(new { Result = "OK" });
+
+        }
+        [HttpPost]
+
+        public ActionResult UploadFile(int productId)
+        {
+            var product = db.Products.Find(productId);
+            string pathFolder = "/Assets/Admin/image/";
+            if (!Directory.Exists(pathFolder))
+            {
+                Directory.CreateDirectory(Server.MapPath(pathFolder));
+            }
+            if (ModelState.IsValid)
+            {
+                List<Image> images = new List<Image>();
+                HttpFileCollectionBase files = Request.Files;
+                for (int i = 0; i < files.Count; i++)
+                {
+                    var file = files[i];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = DateTime.Now.Ticks.ToString() + "_" + Path.GetFileName(file.FileName);
+                        //save file
+                        var path = Path.Combine(Server.MapPath(pathFolder), fileName);
+                        file.SaveAs(path);
+                        Image image = new Image()
+                        {
+                            ImageName = file.FileName,
+                            ImageUrl = pathFolder + fileName,
+                        };
+                        images.Add(image);
+                    }
+                }
+                product.Images = images;
+                //set the first image is primary
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Json(new { data = "OK" });
+        }
+        public JsonResult DeleteFile(int id)
+        {
+            if (String.IsNullOrEmpty(id.ToString()))
             {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(new { Result = "Error" });
@@ -218,6 +231,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 {
                     System.IO.File.Delete(path);
                 }
+
                 return Json(new { Result = "OK" });
             }
             catch (Exception ex)

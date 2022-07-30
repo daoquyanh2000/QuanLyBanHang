@@ -102,40 +102,7 @@
             <div class="col-md-10">
                 <table class="table" id="tableImage">
 
-                    <tr>
-                        <th>
-                            Tên ảnh
-                        </th>
-                        <th>
-                            Ảnh
-                        </th>
-                        <th>
-                            Chọn ảnh chính
-                        </th>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center;">
-                            123.ipg
-                        </td>
-                        <td style="text-align:center;">
-                            123123123
-                        </td>
-                        <td style="text-align:center;">
-                            <input type="radio" name="radioImage">
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            123.ipg
-                        </td>
-                        <td>
-                            123123123
-                        </td>
-                        <td>
-                            <input type="radio" name="selectMainImage">
-                        </td>
-                    </tr>
                 </table>
             </div>
 
@@ -158,6 +125,7 @@
 <script>
     $('#inputImage').on('change', function () {
         let html = `
+                    <thead>
                     <tr>
                         <th>
                             Tên ảnh
@@ -168,7 +136,9 @@
                         <th>
                             Chọn ảnh chính
                         </th>
-                    </tr>`;
+                    </tr>
+                    </thead>
+`;
 
 
         files = $(this)[0].files;
@@ -183,10 +153,11 @@
                             <img src="${url}" alt="Alternate Text" style="width:100px" />
                         </td>
                         <td>
-                            <input type="radio" name="SelectedImage" value="${i}">
+                            <input type="radio" name="selectedImage" value="${i}">
                         </td>
                     </tr>`
         }
+        $(html).wrap('<tbody></tbody>')
         $('#tableImage').html(html);
     })
 </script>
