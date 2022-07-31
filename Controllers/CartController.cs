@@ -20,6 +20,7 @@ namespace QuanLyBanHang.Controllers
             if(cart != null)
             {
                 list = (List<CartItem>)cart;
+                return View(list);
             }
             return View(list);
         }
@@ -81,15 +82,8 @@ namespace QuanLyBanHang.Controllers
                 list.Add(item);
                 Session[CartSession] = list;
             }
-            return Redirect("Index");
+            return Json(new {Result = "OK"});
         }
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+     
     }
 }

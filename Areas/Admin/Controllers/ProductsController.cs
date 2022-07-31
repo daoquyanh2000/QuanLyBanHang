@@ -209,7 +209,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                             ImageName = file.FileName,
                             ImageUrl = pathFolder + fileName,
                         };
-                        image.IsPrimary = true;
                         images.Add(image);
                     }
                 }

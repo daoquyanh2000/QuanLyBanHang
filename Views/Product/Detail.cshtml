@@ -12,13 +12,13 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
-                        <img class="product__details__pic__item--large"
+                        <img style="width:100%;max-height:600px;object-fit:cover" class="product__details__pic__item--large"
                              src="@Model.Images.Where(img => img.IsPrimary == true).First().ImageUrl" alt="">
                     </div>
                     <div class="product__details__pic__slider owl-carousel">
-                        @{ foreach (var image in Model.Images.Where(img => img.IsPrimary == false).ToList())
+                        @{ foreach (var image in Model.Images.ToList())
                             {
-                                <img data-imgbigurl="@image.ImageUrl"
+                                <img style="width:100px;height:100px;object-fit:cover" data-imgbigurl="@image.ImageUrl"
                                      src="@image.ImageUrl" alt="">
 
                             }}
@@ -28,13 +28,14 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
                     <h3>@Model.Title</h3>
-                    @{ if(Model.Discount>0){
-                       <div class="product__details__price"><span style="text-decoration:line-through;">@Model.Price</span> @{(Model.Price*(1 - Model.Discount/100)).ToString();}</div> 
-                       }
+                    @{ if (Model.Discount > 0)
+                        {
+                            <div class="product__details__price"><span style="text-decoration:line-through;">@Model.Price</span> @{(Model.Price * (1 - Model.Discount / 100)).ToString();}</div>
+                        }
                         else
                         {
-                            <div class="product__details__price">@Model.Price}</div>
-                        }   
+                            <div class="product__details__price">@Model.Price</div>
+                        }
                     }
                     <p>
                         @Model.Info
@@ -42,15 +43,14 @@
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="text" value="@quantity">
+                                <input id="quantity" type="text" value="@quantity">
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">ADD TO CARD</a>
+                    <a href="#" class="primary-btn" id="add-to-cart">ADD TO CARD</a>
                     <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
                         <li><b>Availability</b> <span>In Stock</span></li>
-                        <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
                         <li><b>Weight</b> <span>0.5 kg</span></li>
                         <li>
                             <b>Share on</b>
@@ -85,3 +85,18 @@
         </div>
     </div>
 </section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script defer>
+    $("#add-to-cart").on("click",() => {
+        let quantity = $("#quantity").val()
+        $.ajax({
+            url: "/Cart/AddItem?ProductId=@Model.Id&quantity=" + quantity,
+            method: "POST",
+            success: function () {
+                window.location= "/Cart"
+            }
+        })
+    })
+</script>

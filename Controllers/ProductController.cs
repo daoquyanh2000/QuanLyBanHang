@@ -46,5 +46,13 @@ namespace QuanLyBanHang.Controllers
             var product = db.Products.Find(ProductId);
             return View(product);
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

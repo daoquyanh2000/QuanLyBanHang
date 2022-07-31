@@ -1,4 +1,5 @@
-﻿@model IEnumerable<QuanLyBanHang.Models.CartItem>
+﻿@model List<QuanLyBanHang.Models.CartItem>
+@using QuanLyBanHang.Models;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,11 +21,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{ foreach (var item in Model)
+                            @{ foreach (CartItem item in Model)
                                 {
                                     <tr>
                                         <td class="shoping__cart__item">
-                                            <img src="@item.Product.Images.First().ImageUrl" alt="">
+                                            <img style="width:100px; height:100px;object-fit:cover;" src="@item.Product.Images.First().ImageUrl" alt="">
                                             <h5>@item.Product.Title</h5>
                                         </td>
                                         <td class="shoping__cart__price">
@@ -38,7 +39,7 @@
                                             </div>
                                         </td>
                                         <td class="shoping__cart__total">
-                                            @{(item.Price*item.Quantity).ToString();}
+                                            @(item.Price*item.Quantity)
                                         </td>
                                         <td class="shoping__cart__item__close">
                                             <span class="icon_close"></span>
@@ -62,15 +63,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">APPLY COUPON</button>
-                        </form>
-                    </div>
-                </div>
+                
             </div>
             <div class="col-lg-6">
                 <div class="shoping__checkout">
