@@ -78,24 +78,38 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                         pathImage = pathFolder + fileName;
                     }
                 }
-
-                var products = db.Products.Where(x => categoryDto.ProductIds.Contains(x.Id)).ToList();
-                if (!products.Any())
+                if (categoryDto.ProductIds != null)
                 {
-                    return RedirectToAction("Index");
+                    var products = db.Products.Where(x => categoryDto.ProductIds.Contains(x.Id)).ToList();
+                    var category = new Category()
+                    {
+                        Id = 0,
+                        Name = categoryDto.Name,
+                        PathImage = pathImage,
+                        Status = categoryDto.Status,
+                        Info = categoryDto.Info,
+                        Products = products
+                    };
+                    db.Entry(category).State = EntityState.Added;
+                    db.Categories.Add(category);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var category = new Category()
+                    {
+                        Id = 0,
+                        Name = categoryDto.Name,
+                        PathImage = pathImage,
+                        Status = categoryDto.Status,
+                        Info = categoryDto.Info,
+                    };
+                    db.Entry(category).State = EntityState.Added;
+                    db.Categories.Add(category);
+                    db.SaveChanges();
 
                 }
-                var category = new Category() { 
-                    Id = 0, 
-                    Name = categoryDto.Name,
-                    PathImage = pathImage,
-                    Status=categoryDto.Status,
-                    Info=categoryDto.Info,
-                    Products = products };
 
-                db.Entry(category).State = EntityState.Added;
-                db.Categories.Add(category);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -134,6 +148,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             var category = db.Categories.Include("Products").Single(c => c.Id == categoryDto.Id);
             if (ModelState.IsValid)
             {
+                db.Categories.Attach(category);
                 string pathImage = string.Empty;
                 //save image
                 for (int i = 0; i < Request.Files.Count; i++)
@@ -159,27 +174,36 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 category.PathImage = pathImage;
                 foreach (var product in category.Products.ToList())
                 {
-                    //remove the product if not in list of product
-                    if (!categoryDto.ProductIds.Contains(product.Id))
+                    //remove all product if not check anything
+                    if (categoryDto.ProductIds == null)
                     {
                         category.Products.Remove(product);
                     }
-                }
-                foreach (var productId in categoryDto.ProductIds)
-                {
-                    //Add the product which are not in the list of category's product
-                    if (!category.Products.Select(x => x.Id).Contains(productId))
+                    else
                     {
-                        var newProduct = new Product
+                        //remove the product if not in list of product
+                        if (!categoryDto.ProductIds.Contains(product.Id))
                         {
-                            Id = productId,
-                        };
-                        db.Products.Attach(newProduct);
-                        category.Products.Add(newProduct);
+                            category.Products.Remove(product);
+                        }
                     }
                 }
-
-                
+                if (categoryDto.ProductIds != null)
+                {
+                    foreach (var productId in categoryDto.ProductIds)
+                    {
+                        //Add the product which are not in the list of category's product
+                        if (!category.Products.Select(x => x.Id).Contains(productId))
+                        {
+                            var newProduct = new Product
+                            {
+                                Id = productId,
+                            };
+                            db.Products.Attach(newProduct);
+                            category.Products.Add(newProduct);
+                        }
+                    }
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

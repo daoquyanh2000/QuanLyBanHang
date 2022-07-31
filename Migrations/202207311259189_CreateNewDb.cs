@@ -1,9 +1,9 @@
-namespace QuanLyBanHang.Migrations
+﻿namespace QuanLyBanHang.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class createDb : DbMigration
+    public partial class CreateNewDb : DbMigration
     {
         public override void Up()
         {
@@ -13,6 +13,9 @@ namespace QuanLyBanHang.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        PathImage = c.String(),
+                        Info = c.String(),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
