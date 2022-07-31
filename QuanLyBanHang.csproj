@@ -174,10 +174,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207302148577_createDb.cs" />
-    <Compile Include="Migrations\202207311148056_abc.cs" />
-    <Compile Include="Migrations\202207311148056_abc.designer.cs">
-      <DependentUpon>202207311148056_abc.cs</DependentUpon>
+    <Compile Include="Migrations\202207311259189_CreateNewDb.cs" />
+    <Compile Include="Migrations\202207311259189_CreateNewDb.designer.cs">
+      <DependentUpon>202207311259189_CreateNewDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CartItem.cs" />
@@ -423,8 +422,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207311148056_abc.resx">
-      <DependentUpon>202207311148056_abc.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207311259189_CreateNewDb.resx">
+      <DependentUpon>202207311259189_CreateNewDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
