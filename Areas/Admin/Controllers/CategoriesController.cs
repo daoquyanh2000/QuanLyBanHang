@@ -10,6 +10,7 @@ using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
 using QuanLyBanHang.Areas.Admin.Models;
 using PagedList;
+using System.IO;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
@@ -22,7 +23,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSizeNumber = 4;
-            var paged = db.Categories.ToList().ToPagedList(pageNumber, pageSizeNumber);
+            var paged = db.Categories.OrderByDescending(x=>x.Id).ToList().ToPagedList(pageNumber, pageSizeNumber);
             return View(paged);
         }
 
@@ -54,12 +55,44 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,ProductIds")] CreateCategoryDto categoryDto)
+        public ActionResult Create(CreateCategoryDto categoryDto)
         {
+            string pathFolder = "/Assets/Admin/image/";
+            if (!Directory.Exists(pathFolder))
+            {
+                Directory.CreateDirectory(Server.MapPath(pathFolder));
+            }
             if (ModelState.IsValid)
             {
+                string pathImage = string.Empty;
+                //save image
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    var file = Request.Files[i];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = DateTime.Now.Ticks.ToString() + "_" + Path.GetFileName(file.FileName);
+                        //save file
+                        var path = Path.Combine(Server.MapPath(pathFolder), fileName);
+                        file.SaveAs(path);
+                        pathImage = pathFolder + fileName;
+                    }
+                }
+
                 var products = db.Products.Where(x => categoryDto.ProductIds.Contains(x.Id)).ToList();
-                var category = new Category() { Id = 0, Name = categoryDto.Name, Products = products };
+                if (!products.Any())
+                {
+                    return RedirectToAction("Index");
+
+                }
+                var category = new Category() { 
+                    Id = 0, 
+                    Name = categoryDto.Name,
+                    PathImage = pathImage,
+                    Status=categoryDto.Status,
+                    Info=categoryDto.Info,
+                    Products = products };
+
                 db.Entry(category).State = EntityState.Added;
                 db.Categories.Add(category);
                 db.SaveChanges();
@@ -72,7 +105,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // GET: Admin/Categories/Edit/5
         public ActionResult Edit(int? id)
         {
-            GetAllProducts();
             var products = db.Products.ToList();
             ViewBag.products = products;
             if (id == null)
@@ -92,18 +124,67 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ProductIds")] Category category)
+        public ActionResult Edit(CreateCategoryDto categoryDto)
         {
-            GetAllProducts();
+            string pathFolder = "/Assets/Admin/image/";
+            if (!Directory.Exists(pathFolder))
+            {
+                Directory.CreateDirectory(Server.MapPath(pathFolder));
+            }
+            var category = db.Categories.Include("Products").Single(c => c.Id == categoryDto.Id);
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                string pathImage = string.Empty;
+                //save image
+                for (int i = 0; i < Request.Files.Count; i++)
+                {
+                    var file = Request.Files[i];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = DateTime.Now.Ticks.ToString() + "_" + Path.GetFileName(file.FileName);
+                        //save file
+                        var path = Path.Combine(Server.MapPath(pathFolder), fileName);
+                        file.SaveAs(path);
+                        pathImage = pathFolder + fileName;
+                    }
+                    else
+                    {
+                        pathImage = categoryDto.PathImage;
+                    }
+                }
+                //edit data
+                category.Name = categoryDto.Name;
+                category.Status = categoryDto.Status;
+                category.Info = categoryDto.Info;
+                category.PathImage = pathImage;
+                foreach (var product in category.Products.ToList())
+                {
+                    //remove the product if not in list of product
+                    if (!categoryDto.ProductIds.Contains(product.Id))
+                    {
+                        category.Products.Remove(product);
+                    }
+                }
+                foreach (var productId in categoryDto.ProductIds)
+                {
+                    //Add the product which are not in the list of category's product
+                    if (!category.Products.Select(x => x.Id).Contains(productId))
+                    {
+                        var newProduct = new Product
+                        {
+                            Id = productId,
+                        };
+                        db.Products.Attach(newProduct);
+                        category.Products.Add(newProduct);
+                    }
+                }
+
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(category);
         }
-
         // GET: Admin/Categories/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -128,12 +209,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        private void GetAllProducts()
-        {
-            var products = db.Products.ToList();
-            ViewBag.Products = products;
         }
 
         protected override void Dispose(bool disposing)
