@@ -55,7 +55,7 @@ namespace QuanLyBanHang.Controllers
                         if (item.Product.Id == ProductId)
                         {
                             item.Quantity += quantity;
-                            item.Price = product.Price * (1 - (product.Discount) * (1 / 100));
+                            item.Price = product.Price * (1 - (double)product.Discount/100);
                         }
 
                     }
@@ -65,7 +65,7 @@ namespace QuanLyBanHang.Controllers
                     var item = new CartItem();
                     item.Product = product;
                     item.Quantity = quantity;
-                    item.Price = product.Price * (1 - (product.Discount) * (1 / 100));
+                    item.Price = product.Price * (1 - (double)product.Discount / 100);
                     list.Add(item);
                 }
                 Session[CartSession] = list;
@@ -75,7 +75,7 @@ namespace QuanLyBanHang.Controllers
                 var item = new CartItem();
                 item.Product = product;
                 item.Quantity = quantity;
-                item.Price = product.Price * (1 - (product.Discount) * (1 / 100));
+                item.Price = product.Price * (1 - (double)product.Discount / 100);
                 var list = new List<CartItem>();
                 list.Add(item);
                 Session[CartSession] = list;
@@ -88,7 +88,7 @@ namespace QuanLyBanHang.Controllers
             foreach (var update in updates)
             {
                 var product = db.Products.Find(update.ProductId);
-                var cartItem = new CartItem() { Product = product, Price = product.Price * (1 - (product.Discount) * (1 / 100)), Quantity = update.Quantity };
+                var cartItem = new CartItem() { Product = product, Price = product.Price * (1 - (double)product.Discount / 100), Quantity = update.Quantity };
                 list.Add(cartItem);
             }
             Session[CartSession] = list;

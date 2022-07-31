@@ -1,4 +1,5 @@
 ﻿using QuanLyBanHang.DB;
+using QuanLyBanHang.DB.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,10 @@ namespace QuanLyBanHang.Controllers
         private StoreContext db = new StoreContext();
         public ActionResult Index()
         {
-            return View();
+            var categories = db.Categories.ToList().Where(x => x.Status == CategoryStatus.Active);
+            ViewBag.categories = categories;
+            var productTypes =db.ProductTypes.ToList();
+            return View(productTypes);
         }
 
         public ActionResult About()

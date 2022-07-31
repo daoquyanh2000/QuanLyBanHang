@@ -14,7 +14,7 @@
                 <div class="product__discount__item__text">
                     <span>@product.Title</span>
                     <h5><a href="#">@product.Info</a></h5>
-                    <div class="product__item__price">@{(product.Price * (1 - product.Discount / 100)).ToString();}<span></span></div>
+                    <div class="product__item__price">@{(product.Price * (1 - (double)product.Discount / 100)).ToString();}<span></span></div>
                 </div>
             </div>
         </div>

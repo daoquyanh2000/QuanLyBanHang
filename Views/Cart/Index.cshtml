@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var total = Model.Sum(x => x.Price * x.Quantity);
 }
 
 <section class="shoping-cart spad">
@@ -70,7 +71,7 @@
                     <h5>Cart Total</h5>
                     <ul>
                         @*<li>Subtotal <span>$454.98</span></li>*@
-                        <li>Total <span>@{ Model.Sum(x => x.Price * x.Quantity).ToString();}</span></li>
+                        <li>Total <span>@total &#8363;</span></li>
                     </ul>
                     <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                 </div>

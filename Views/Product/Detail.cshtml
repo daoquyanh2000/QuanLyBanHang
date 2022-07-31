@@ -4,6 +4,7 @@
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var quantity = 1;
+    var price = Model.Price * (1 - (double)Model.Discount / 100);
 }
 
 <section class="product-details spad">
@@ -30,7 +31,11 @@
                     <h3>@Model.Title</h3>
                     @{ if (Model.Discount > 0)
                         {
-                            <div class="product__details__price"><span style="text-decoration:line-through;">@Model.Price</span> @{(Model.Price * (1 - Model.Discount / 100)).ToString();}&#8363;</div>
+                            <div class="product__details__price">
+                    <span style="text-decoration:line-through;">@Model.Price</span>
+                    <span style="padding-left:5px">@price.ToString()&#8363;</span>
+                    
+                            </div>
                         }
                         else
                         {
