@@ -163,8 +163,22 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult ChangePrimaryImage( int productId,int imageId)
         {
-            Product product = db.Products.Find(productId);
-                return Json(new { Result = "OK" });
+            var product = db.Products.Find(productId);
+            var images = product.Images;
+            images.ToList().ForEach(x => x.IsPrimary = false);
+            foreach (var img in images)
+            {
+                if (img.Id == imageId)
+                {
+                    img.IsPrimary = true;
+                    break;
+                }
+            }
+            product.Images = images;
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Json(new { Result = "OK" });
 
         }
         [HttpPost]
@@ -195,6 +209,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                             ImageName = file.FileName,
                             ImageUrl = pathFolder + fileName,
                         };
+                        image.IsPrimary = true;
                         images.Add(image);
                     }
                 }
