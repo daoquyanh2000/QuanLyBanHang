@@ -16,16 +16,15 @@ namespace QuanLyBanHang.Controllers
         // GET: Product
         public ActionResult Index(int? ProductTypeId, int PageNumber = 1)
         {
-            List<Product> products;
             if(ProductTypeId != null)
             {
-                products = db.Products.Where(product => product.ProductTypeId == ProductTypeId).ToList();
+                return View(db.Products.Where(product => product.ProductTypeId == ProductTypeId && product.Discount == 0).ToList().ToPagedList(PageNumber,PageSize));
             }
             else
             {
-                products = db.Products.ToList();
+                var list = db.Products.ToList().ToPagedList(PageNumber, PageSize);
+                return View(list);
             }
-            return View(products);
         }
 
         public ActionResult ProductSidebar()
@@ -41,6 +40,11 @@ namespace QuanLyBanHang.Controllers
         {
             var saleProducts = db.Products.Where(p => p.Discount > 0 && p.Status == ProductStatus.SecondValue).ToList();
             return PartialView(saleProducts);
+        }
+        public ActionResult Detail(int ProductId)
+        {
+            var product = db.Products.Find(ProductId);
+            return View(product);
         }
     }
 }

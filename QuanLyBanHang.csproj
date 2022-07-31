@@ -396,6 +396,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\ProductSidebar.cshtml" />
     <Content Include="Views\Product\SaleProducts.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
