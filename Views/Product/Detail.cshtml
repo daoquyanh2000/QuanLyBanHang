@@ -30,11 +30,11 @@
                     <h3>@Model.Title</h3>
                     @{ if (Model.Discount > 0)
                         {
-                            <div class="product__details__price"><span style="text-decoration:line-through;">@Model.Price</span> @{(Model.Price * (1 - Model.Discount / 100)).ToString();}</div>
+                            <div class="product__details__price"><span style="text-decoration:line-through;">@Model.Price</span> @{(Model.Price * (1 - Model.Discount / 100)).ToString();}&#8363;</div>
                         }
                         else
                         {
-                            <div class="product__details__price">@Model.Price</div>
+                            <div class="product__details__price">@Model.Price &#8363;</div>
                         }
                     }
                     <p>

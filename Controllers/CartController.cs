@@ -1,11 +1,8 @@
-﻿using System;
+﻿using QuanLyBanHang.DB;
+using QuanLyBanHang.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using QuanLyBanHang.Models;
-using QuanLyBanHang.DB.Entities;
-using QuanLyBanHang.DB;
 namespace QuanLyBanHang.Controllers
 {
     public class CartController : Controller
@@ -13,11 +10,11 @@ namespace QuanLyBanHang.Controllers
         private const string CartSession = "CartSession";
         private StoreContext db = new StoreContext();
         // GET: Cart
-        public ActionResult Index() 
+        public ActionResult Index()
         {
             var cart = Session[CartSession];
             var list = new List<CartItem>();
-            if(cart != null)
+            if (cart != null)
             {
                 list = (List<CartItem>)cart;
                 return View(list);
@@ -28,7 +25,8 @@ namespace QuanLyBanHang.Controllers
         {
             var cart = Session[CartSession];
             var partialCart = new PartialCart();
-            if(cart != null) {
+            if (cart != null)
+            {
                 var list = (List<CartItem>)cart;
                 var totalMoney = list.Sum(item => item.Quantity * item.Price);
                 var totalItem = list.Count;
@@ -42,11 +40,11 @@ namespace QuanLyBanHang.Controllers
             }
             return PartialView(partialCart);
         }
-        public ActionResult AddItem(int ProductId,int quantity)
+        public ActionResult AddItem(int ProductId, int quantity)
         {
             var product = db.Products.Find(ProductId);
             var cart = Session[CartSession];
-            if( cart != null)
+            if (cart != null)
             {
                 var list = (List<CartItem>)cart;
                 if (list.Exists(x => x.Product.Id == ProductId))
@@ -57,9 +55,9 @@ namespace QuanLyBanHang.Controllers
                         if (item.Product.Id == ProductId)
                         {
                             item.Quantity += quantity;
-                            item.Price = product.Price*(1 - (product.Discount) * (1 / 100));
+                            item.Price = product.Price * (1 - (product.Discount) * (1 / 100));
                         }
-                        
+
                     }
                 }
                 else
@@ -82,8 +80,19 @@ namespace QuanLyBanHang.Controllers
                 list.Add(item);
                 Session[CartSession] = list;
             }
-            return Json(new {Result = "OK"});
+            return Json(new { Result = "OK" });
         }
-     
+        public ActionResult UpdateCart(List<UpdateCartDto> updates)
+        {
+            var list = new List<CartItem>();
+            foreach (var update in updates)
+            {
+                var product = db.Products.Find(update.ProductId);
+                var cartItem = new CartItem() { Product = product, Price = product.Price * (1 - (product.Discount) * (1 / 100)), Quantity = update.Quantity };
+                list.Add(cartItem);
+            }
+            Session[CartSession] = list;
+            return Json(new { Result = "OK" });
+        }
     }
 }
