@@ -27,48 +27,52 @@
                     </div>
                 </div>
                 @*<div class="filter__item">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-5">
-                            <div class="filter__sort">
-                                <span>Sort By</span>
-                                <select>
-                                    <option value="0">Default</option>
-                                    <option value="0">Default</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="filter__found">
-                                <h6><span>16</span> Products found</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-5">
+                    <div class="filter__sort">
+                        <span>Sort By</span>
+                        <select>
+                            <option value="0">Default</option>
+                            <option value="0">Default</option>
+                        </select>
                     </div>
-                </div>*@
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="filter__found">
+                        <h6><span>16</span> Products found</h6>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="filter__option">
+                        <span class="icon_grid-2x2"></span>
+                        <span class="icon_ul"></span>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+                <div class="section-title product__discount__title">
+                    <h2>Products</h2>
+                </div>
                 <div class="row">
-                    @{ foreach(var product in Model)
-            {
-                                        <div class="col-lg-4 col-md-6 col-sm-6">
-                                            <div class="product__item">
-                                                <div class="product__item__pic set-bg" data-setbg="@product.Images.Where(x => x.IsPrimary == true).First().ImageUrl">
-                                                    <ul class="product__item__pic__hover">
-                                                        <li><a href="Product/Detail?ProductId=@product.Id"><i class="fa fa-shopping-cart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product__item__text">
-                                                    <h6><a href="#">@product.Title</a></h6>
-                                                    <h5>@product.Price &#8363;</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-            }
-                           }
-                    
+
+                    @{ foreach (var product in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@product.Images.Where(x => x.IsPrimary == true).First().ImageUrl">
+                                        <ul class="product__item__pic__hover">
+                                            <li><a href="Product/Detail?ProductId=@product.Id"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">@product.Title</a></h6>
+                                        <h5>@product.Price &#8363;</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
                 </div>
                 <div class="product__pagination">
                     @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) / @pagedList.PageCount
@@ -78,7 +82,7 @@
 
                         }
                     </div>
-            </div>
+                </div>
         </div>
     </div>
 </section>
