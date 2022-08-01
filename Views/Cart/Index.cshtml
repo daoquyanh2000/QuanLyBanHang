@@ -26,7 +26,7 @@
                                 {
                                     <tr>
                                         <td class="shoping__cart__item">
-                                            <img style="width:100px; height:100px;object-fit:cover;" src="@item.Product.Images.First().ImageUrl" alt="">
+                                            <img style="width:100px; height:100px;object-fit:cover;" src="@item.Product.Images.Where(x=>x.IsPrimary==true).FirstOrDefault().ImageUrl" alt="">
                                             <h5>@item.Product.Title</h5>
                                         </td>
                                         <td class="shoping__cart__price">

@@ -13,9 +13,7 @@ namespace QuanLyBanHang.Controllers
         private StoreContext db = new StoreContext();
         public ActionResult Index()
         {
-            var categories = db.Categories.ToList().Where(x => x.Status == CategoryStatus.Active);
-            ViewBag.categories = categories;
-            var productTypes =db.ProductTypes.ToList();
+            var productTypes = db.ProductTypes.ToList().Where(x => x.Status == ProductTypeStatus.Active);
             return View(productTypes);
         }
 

@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var pathImage = Model.PathImage;
+
 }
 
 <h2>Chi tiết</h2>
@@ -14,11 +16,28 @@
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Info)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+        <dt>
+            Ảnh
+        </dt>
+        <dd>
+            <img src="@pathImage" alt="Alternate Text" style="width:200px" />
 
+        </dd>
     </dl>
 </div>
 <p>

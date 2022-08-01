@@ -1,8 +1,9 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-@using QuanLyBanHang.DB.Entities 
+@using QuanLyBanHang.DB.Entities
 @model IEnumerable<QuanLyBanHang.DB.Entities.ProductType>
+<!-- Hero Section Begin -->
 <section class="hero">
     <div class="container">
         <div class="row">
@@ -13,9 +14,10 @@
                         <span>All departments</span>
                     </div>
                     <ul>
-                        @foreach(var item in Model)
+                        @foreach (ProductType item in Model)
                         {
                             <li><a href="/Product?ProductTypeId=@item.ID">@item.Name</a></li>
+
                         }
                     </ul>
                 </div>
@@ -42,10 +44,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="/Assets/Client/img/hero/banner.jpg">
+                <div class="hero__item set-bg" data-setbg="/Assets/Client/img/hero/banner.jpg" style="background-image: url(&quot;/Assets/Client/img/hero/banner.jpg&quot;);">
                     <div class="hero__text">
                         <span>FRUIT FRESH</span>
-                        <h2>Vegetable <br />100% Organic</h2>
+                        <h2>Vegetable <br>100% Organic</h2>
                         <p>Free Pickup and Delivery Available</p>
                         <a href="#" class="primary-btn">SHOP NOW</a>
                     </div>
@@ -54,15 +56,14 @@
         </div>
     </div>
 </section>
-
 <!-- Hero Section End -->
 <!-- Categories Section Begin -->
 <section class="categories">
     <div class="container">
         <div class="row">
             <div class="categories__slider owl-carousel">
-                @foreach (Category item in ViewBag.categories)
-                {                   
+                @foreach (ProductType item in Model)
+                {
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="@item.PathImage">
                             <h5><a href="">@item.Name</a></h5>

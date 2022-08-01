@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<QuanLyBanHang.DB.Entities.ProductType>
-
+@using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var pagedlist = (IPagedList)Model;
 }
 
 <h2>Danh sách loại sản phẩm</h2>
@@ -15,20 +17,39 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            Ảnh
+        </th>
+        <th>Chức năng</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Sửa", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Chi tiết", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Xóa", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        <img src="@item.PathImage" alt="Alternate Text" style="width:100px" />
+    </td>
+    <td>
+        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+    </td>
+</tr>
+    }
 
 </table>
+<!-- Thêm mã phân trang -->
+            Trang @(pagedlist.PageCount < pagedlist.PageNumber ? 0 : pagedlist.PageNumber) / @pagedlist.PageCount
+
+            @Html.PagedListPager(pagedlist, page => Url.Action("Index",
+                new { page }))
+            <!-- Kết thúc -->

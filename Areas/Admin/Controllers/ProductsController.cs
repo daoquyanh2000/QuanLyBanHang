@@ -23,7 +23,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         public ActionResult Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            int pageSizeNumber = 2;
+            int pageSizeNumber = 9;
             var products = db.Products.Include(p => p.ProductType).Include(p => p.Supplier);
             return View(products.ToList().OrderByDescending(p=>p.Id).ToPagedList(pageNumber, pageSizeNumber));
         }

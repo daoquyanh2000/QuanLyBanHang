@@ -32,6 +32,8 @@ namespace QuanLyBanHang.DB.Entities
         public int Stock { get; set; }
         [Display(Name = "Thông số")]
         public string Specification { get; set; }
+        [Display(Name = "Thông tin chi tiết")]
+        public string Description { get; set; }
         [Display(Name = "Danh mục")]
         public virtual ICollection<Category> Categories { get; set; }
 
@@ -41,7 +43,6 @@ namespace QuanLyBanHang.DB.Entities
         public virtual ProductType ProductType { get; set; }
 
         [ForeignKey("Supplier")]
-        [Display(Name = "Nhà cung cấp")]
         public int SupplierId { get; set; }
         public virtual Supplier Supplier { get; set; }
         public virtual ICollection<Image> Images { get; set; }
@@ -50,8 +51,8 @@ namespace QuanLyBanHang.DB.Entities
     public enum ProductStatus
     {
         [Display(Name = "Vô hiệu hóa")]
-        FirstValue = 0,
+        Inactive = 0,
         [Display(Name = "Đang hoạt động")]
-        SecondValue = 1,
+        Active = 1,
     }
 }
