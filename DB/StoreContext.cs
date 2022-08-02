@@ -24,5 +24,7 @@ namespace QuanLyBanHang.DB
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public System.Data.Entity.DbSet<QuanLyBanHang.DB.Entities.Customer> Customers { get; set; }
     }
 }

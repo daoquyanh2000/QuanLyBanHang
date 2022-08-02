@@ -21,7 +21,8 @@ namespace QuanLyBanHang.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Order order)
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Order order,Customer customer)
         {
             if (ModelState.IsValid) 
             {
@@ -51,8 +52,17 @@ namespace QuanLyBanHang.Controllers
             }
             else
             {
-                return View();
+                return View(customer);
             }
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
+
 }

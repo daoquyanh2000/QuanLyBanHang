@@ -17,18 +17,20 @@ namespace QuanLyBanHang.Controllers
             return View(productTypes);
         }
 
-        public ActionResult About()
+        public ActionResult SearchBar()
         {
-            ViewBag.Message = "Your application description page.";
+            var categories = db.Categories.Where(x => x.Status == CategoryStatus.Active).ToList();
 
-            return View();
+            return PartialView(categories);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

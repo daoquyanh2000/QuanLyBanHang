@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var pagedList = (IPagedList)Model;
 }
-
+@{ Html.RenderAction("SearchBar", "Home");}
 <section class="product spad">
     <div class="container">
         <div class="row">

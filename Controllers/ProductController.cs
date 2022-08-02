@@ -15,20 +15,27 @@ namespace QuanLyBanHang.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Product
-        public ActionResult Index(int? ProductTypeId, int PageNumber = 1)
+        public ActionResult Index(int? ProductTypeId,int PageNumber = 1, string keyword=null )
         {
+            keyword=keyword ?? "";
             var productTypes = db.ProductTypes.ToList().Where(x => x.Status == ProductTypeStatus.Active);
             ViewBag.productTypes = productTypes;
             if (ProductTypeId != null)
             {
-
-                var products = db.Products.Where(p => p.ProductTypeId == ProductTypeId && p.Status==ProductStatus.Active).ToList();
+                var products = from p in db.Products.ToList()
+                               where p.ProductTypeId == ProductTypeId
+                           && p.Status == ProductStatus.Active
+                           select p;
                 return View(products.ToPagedList(PageNumber,PageSize));
             }
             else
             {
-                var list = db.Products.ToList().Where(x=> x.ProductType.Status== ProductTypeStatus.Active && x.Status== ProductStatus.Active);
-                return View(list.ToPagedList(PageNumber, PageSize));
+                var products = from p in db.Products.ToList()
+                               where p.Status == ProductStatus.Active
+                               && (p.Title.ToLower().Contains(keyword.ToLower())
+                               || p.Code.ToLower().Contains(keyword.ToLower()))
+                               select p;
+                return View(products.ToPagedList(PageNumber, PageSize));
             }
   
         }

@@ -39,11 +39,9 @@
             <a href="/Home"><img src="~/Assets/Client/img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            @{
+                Html.RenderAction("PartialCart", "Cart");
+            }
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -58,9 +56,9 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="">Home</a></li>
+                <li class=""><a href="/Home">Home</a></li>
                 <li><a href="/Product">Product</a></li>
-                <li>
+@*                <li>
                     <a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -70,7 +68,7 @@
                     </ul>
                 </li>
                 <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./contact.html">Contact</a></li>*@
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -133,9 +131,9 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="/Home">Home</a></li>
+                            <li class=""><a href="/Home">Home</a></li>
                             <li><a href="/Product">Product</a></li>
-                            <li>
+@*                            <li>
                                 <a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
@@ -144,7 +142,7 @@
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/contact">Contact</a></li>
+                            <li><a href="/contact">Contact</a></li>*@
                         </ul>
                     </nav>
                 </div>

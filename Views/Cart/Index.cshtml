@@ -6,6 +6,7 @@
     var total = Model.Sum(x => x.Price * x.Quantity);
 }
 
+@{ Html.RenderAction("SearchBar", "Home");}
 <section class="shoping-cart spad">
     <div class="container">
         <div class="row">

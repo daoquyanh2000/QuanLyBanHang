@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var list = (List<QuanLyBanHang.Models.CartItem>)Session["CartSession"];
 }
-
+@{ Html.RenderAction("SearchBar", "Home");}
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
     <div class="container">
@@ -18,7 +18,11 @@
         </div>
         <div class="checkout__form">
             <h4>Billing Details</h4>
-            <form>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="row">
@@ -58,13 +62,17 @@
                         <div class="checkout__order">
                             <h4>Your Order</h4>
                             <div class="checkout__order__products">Products <span>Total</span></div>
-                            <ul>
-                                @foreach (var item in list)
-                                {
-                                    <li>@item.Product.Title <span>@item.Price &#8363;</span></li>
-                                }
-                            </ul>
-                            <div class="checkout__order__total">Total <span>@list.Sum(x => x.Quantity * x.Price) &#8363;</span></div>
+                            @if (list != null)
+                            {
+                                <ul>
+                                    @foreach (var item in list)
+                                    {
+                                        <li>@item.Product.Title <span>@item.Price &#8363;</span></li>
+                                    }
+                                </ul>
+                                <div class="checkout__order__total">Total <span>@list.Sum(x => x.Quantity * x.Price) &#8363;</span></div>
+                            }
+
                             <div class="checkout__input__checkbox">
                                 <label for="payment">
                                     Check Payment
@@ -80,16 +88,20 @@
                                 </label>
                             </div>
 
-                            <button type="button" id="btn-submit-form" class="site-btn">PLACE ORDER</button>
+                            <button type="submit" id="btn-submit-form" class="site-btn">PLACE ORDER</button>
                         </div>
                     </div>
                 </div>
-            </form>
+            }
+
+            @*            <form>
+                </form>*@
         </div>
     </div>
 </section>
-<script>
-    $('#btn-submit-form').on('click', function () {
+<!--<script>
+    $('form').on('submit', function (e) {
+        e.preventDefault();
         let formData = new FormData($('form').get(0));
         $.ajax({
             url: "/Checkout/index",
@@ -110,13 +122,13 @@
 
 </script>
 <!-- Checkout Section End -->
-@*modal payment success*@
+-->
+<!--@*modal payment success*@-->
 <!-- Modal -->
-<div id="success_tic" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
+<!--<div id="success_tic" class="modal fade" role="dialog">
+    <div class="modal-dialog">-->
+<!-- Modal content-->
+<!--<div class="modal-content">
             <a class="close" href="#" data-dismiss="modal">&times;</a>
             <div class="page-body">
                 <div class="head">
@@ -282,4 +294,4 @@
 }
 
 
-</style>
+</style>-->
