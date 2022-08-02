@@ -10,16 +10,18 @@ namespace QuanLyBanHang.DB.Entities
         [Key]
         public int Id { get; set; }
         [Display(Name = "Họ tên")]
+        [Required]
         public string FullName { get; set; }
         [Display(Name = "Trạng thái")]
+        [Required]
         public DeliveryEmployeeStatus Status { get; set; }
         public string Phone { get; set; }
     }
     public enum DeliveryEmployeeStatus
     {
         [Display(Name = "Đang giao hàng")]
-        FirstValue = 0,
+        Inactive = 0,
         [Display(Name = "Rảnh")]
-        SecondValue = 1,
+        Active = 1,
     }
 }

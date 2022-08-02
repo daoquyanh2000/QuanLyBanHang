@@ -94,7 +94,7 @@
             }
             else
             {
-                <span>@item.Images.Count() ảnh</span>
+                <span>@item.Images.Count() ảnh <span>  (@item.Images.Where(x=>x.IsPrimary==true).Count())</span></span>
             }
     </td>
     <td>

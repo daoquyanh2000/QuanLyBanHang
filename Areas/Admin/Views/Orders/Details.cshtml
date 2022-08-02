@@ -1,30 +1,46 @@
 ﻿@model QuanLyBanHang.DB.Entities.Order
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Confirm";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Confirm</h2>
 
 <div>
     <h4>Order</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Customer.FullName)
+            @Html.DisplayNameFor(model => model.FullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Customer.FullName)
+            @Html.DisplayFor(model => model.FullName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedTime)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedTime)
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
         </dd>
 
         <dt>
@@ -36,13 +52,20 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.CreatedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedTime)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Total)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Total)
         </dd>
-
     </dl>
 </div>
 <p>

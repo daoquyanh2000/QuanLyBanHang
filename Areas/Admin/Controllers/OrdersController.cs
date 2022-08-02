@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
 
@@ -16,10 +17,12 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Admin/Orders
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var orders = db.Orders.Include(o => o.Customer);
-            return View(orders.ToList());
+            //hello ae
+            int pageNumber = (page ?? 1);
+            int pageSizeNumber = 9;
+            return View(db.Orders.OrderByDescending(x=>x.CreatedTime).ToPagedList(pageNumber, pageSizeNumber));
         }
 
         // GET: Admin/Orders/Details/5
@@ -36,11 +39,9 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             return View(order);
         }
-
-        // GET: Admin/Orders/Create
+        [HttpPost]
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FullName");
             return View();
         }
 
@@ -49,7 +50,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatedTime,Status,CustomerId,Total")] Order order)
+        public ActionResult Create([Bind(Include = "Id,CreatedTime,Status,Total,FullName,Email,Address,Phone")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +59,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FullName", order.CustomerId);
             return View(order);
         }
 
@@ -69,12 +69,13 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.deliveryEmployeesId = new SelectList(db.DeliveryEmployees.ToList(), "Id", "FullName");
+
             Order order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FullName", order.CustomerId);
             return View(order);
         }
 
@@ -83,18 +84,18 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CreatedTime,Status,CustomerId,Total")] Order order)
+        public ActionResult Edit(int deliveryEmployeesId,int Id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
+                var order = db.Orders.Find(Id);
+                order.DeliveryEmployee = db.DeliveryEmployees.Find(deliveryEmployeesId);
+                order.Status = OrderStatus.Shipping;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FullName", order.CustomerId);
-            return View(order);
+            return View();
         }
-
         // GET: Admin/Orders/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -116,7 +117,8 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
+            order.Status = OrderStatus.Cancel;
+            db.Entry(order).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

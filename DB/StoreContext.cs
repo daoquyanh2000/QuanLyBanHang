@@ -19,8 +19,6 @@ namespace QuanLyBanHang.DB
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

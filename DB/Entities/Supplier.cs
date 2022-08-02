@@ -12,9 +12,11 @@ namespace QuanLyBanHang.DB.Entities
 
         public int Id { get; set; }
         [Display(Name = "Nhà cung cấp")]
+        [Required]
 
         public string Name { get; set; }
         [Display(Name = "Địa chỉ ")]
+        [Required]
         public string Address { get; set; }
     }
 }

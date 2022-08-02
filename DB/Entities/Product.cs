@@ -13,22 +13,30 @@ namespace QuanLyBanHang.DB.Entities
         public int Id { get; set; }
 
         [Display(Name = "Tên")]
+        [Required]
         public string Title { get; set; }
         [Display(Name = "Mã")]
+        [Required]
         public string Code { get; set; }
         [Display(Name = "Giá")]
+        [Required]
         public long Price { get; set; }
         [Display(Name = "Trạng thái")]
+        [Required]
         public ProductStatus Status { get; set; }
         [Display(Name = "Giảm giá")]
+        [Required]
         public int Discount { get; set; }
 
 
         [Display(Name = "Xuất xứ")]
+        [Required]
         public string Origin { get; set; }
         [Display(Name = "Thông tin")]
+        [Required]
         public string Info { get; set; }
         [Display(Name = "Trong kho")]
+        [Required]
         public int Stock { get; set; }
         [Display(Name = "Thông số")]
         public string Specification { get; set; }
@@ -39,10 +47,12 @@ namespace QuanLyBanHang.DB.Entities
 
         [ForeignKey("ProductType")]
         [Display(Name = "Loại sản phẩm")]
+        [Required]
         public int ProductTypeId { get; set; }
         public virtual ProductType ProductType { get; set; }
 
         [ForeignKey("Supplier")]
+        [Required]
         public int SupplierId { get; set; }
         public virtual Supplier Supplier { get; set; }
         public virtual ICollection<Image> Images { get; set; }

@@ -21,37 +21,38 @@ namespace QuanLyBanHang.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(Customer  customer)
+        public ActionResult Index(Order order)
         {
-            var listItem = (List<CartItem>)Session[CartSession];
-            var total = listItem.Sum(x => x.Quantity * x.Price);
-            var orderDetails = new List<OrderDetail>();
-
-            var order = new Order()
+            if (ModelState.IsValid) 
             {
-                CreatedTime = DateTime.Now,
-                Status = OrderStatus.Pending,
-                Total = (long)total,
-                Customer=customer,
-            };
-            foreach (var item in listItem)
-            {
-                var orderDetail = new OrderDetail()
+                var listItem = (List<CartItem>)Session[CartSession];
+                var total = listItem.Sum(x => x.Quantity * x.Price);
+                var orderDetails = new List<OrderDetail>();
+                foreach (var item in listItem)
                 {
-                    Quantity = item.Quantity,
-                    PricePerUnit = (long)item.Price,
-                    Money = total,
+                    var orderDetail = new OrderDetail()
+                    {
+                        Quantity = item.Quantity,
+                        PricePerUnit = (long)item.Price,
+                        Discount = item.Product.Discount,
+                        Money = item.Quantity * item.Price,
+                        ProductId = item.Product.Id,
+                    };
+                    orderDetails.Add(orderDetail);
                 };
-                orderDetails.Add(orderDetail);
-            };
-            order.OrderDetails = orderDetails;
+                order.Total = (long)total;
+                order.CreatedTime = DateTime.Now;
+                order.OrderDetails = orderDetails;
 
-            db.Orders.Add(order);
-
-            db.SaveChanges();
-
-
-            return View();
+                db.Orders.Add(order);
+                db.SaveChanges();
+                Session[CartSession] = new List<CartItem>();
+                return Json(new{status=true}, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

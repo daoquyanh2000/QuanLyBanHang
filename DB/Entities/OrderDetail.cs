@@ -19,9 +19,13 @@ namespace QuanLyBanHang.DB.Entities
         [ForeignKey("Product")]
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
+        [Required]
         public long PricePerUnit { get; set; }
+        [Required]
         public int Quantity { get; set; }
+        [Required]
         public int Discount { get; set; }
+        [Required]
         public double Money { get; set; }
 
    

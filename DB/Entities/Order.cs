@@ -11,13 +11,20 @@ namespace QuanLyBanHang.DB.Entities
     public class Order
     {
         public int Id { get; set; }
-        public DateTime CreatedTime { get; set; }
+
+        [Required]
+        public string FullName { get; set; }
+        [Required]
+        public string Email { get; set; }
+        [Required]
+        public string Address { get; set; }
+        [Required]
+        public string Phone { get; set; }
         public OrderStatus Status { get; set; }
-        [ForeignKey("Customer")]
-        public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        public DateTime CreatedTime { get; set; }
         public virtual DeliveryEmployee DeliveryEmployee { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        [Required]
         public long Total { get; set; }
 
     }
