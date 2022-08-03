@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
 using QuanLyBanHang.DB.Entities;
+using QuanLyBanHang.Areas.Admin.Models;
+using MoreLinq;
+
 namespace QuanLyBanHang.Controllers
 {
     public class ProductController : Controller
@@ -39,7 +42,21 @@ namespace QuanLyBanHang.Controllers
             }
   
         }
-
+        public ActionResult SubListProduct()
+        {
+            var listListProduct = new List<SubListProduct>();
+                                                                                        
+            foreach (var category in db.Categories.ToList())                            
+            {                                                                           
+                var subListProduct = new SubListProduct();                              
+                subListProduct.CategoryName = category.Name;                            
+                subListProduct.Products = category.Products.Batch(3).ToList();          
+                listListProduct.Add(subListProduct);                                    
+            };                                                                          
+                                                                                        
+                                                                                        
+            return PartialView(listListProduct);                                        
+        }                                                                               
         public ActionResult ProductSidebar()
         {
             var productTypes = db.ProductTypes.ToList().Where(x=>x.Status==ProductTypeStatus.Active);

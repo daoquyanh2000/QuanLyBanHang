@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MoreLinq;
 using PagedList;
 using QuanLyBanHang.Areas.Admin.Models;
 using QuanLyBanHang.DB;
@@ -36,6 +37,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
+
             if (product == null)
             {
                 return HttpNotFound();

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<QuanLyBanHang.Areas.Admin.Models.SubListProduct>
+@using QuanLyBanHang.DB.Entities;
+@{ 
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+@foreach (var listListProduct in Model)
+{
+    if (listListProduct.Products.Count!=0)
+    {
+        <div class="col-lg-4 col-md-6">
+            <div class="latest-product__text">
+                <h4>@listListProduct.CategoryName</h4>
+                <div class="latest-product__slider owl-carousel owl-loaded owl-drag">
+
+
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(-870px, 0px, 0px); transition: all 1.2s ease 0s; width: 1740px;">
+                            @foreach (var listProduct in listListProduct.Products)
+                            {
+                                <div class="owl-item cloned" style="width: 290px;">
+
+                                    <div class="latest-prdouct__slider__item">
+                                        @foreach (var subList in listProduct)
+                                        {
+                                            <a href="/Product/Detail?ProductId=@subList.Id" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="@subList.Images.Where(x=>x.IsPrimary==true).FirstOrDefault().ImageUrl" alt="">
+                                                </div>
+                                                <div class="latest-product__item__text">
+                                                    <h6>@subList.Title</h6>
+                                                    <span style="text-decoration:line-through;">@String.Format(info, "{0:c}", subList.Price).Split(',')[0] &#8363;</span>
+                                                    @{
+                                                        var price = subList.Price * (1 - (double)subList.Discount / 100);
+                                                    }
+                                                <span style=" padding-left:5px">@String.Format(info, "{0:c}", price).Split(',')[0] &#8363;</span>
+
+                                                </div>
+                                            </a>
+                                        }
+
+                                    </div>
+                                </div>
+                                                        }
+                        </div>
+                    </div><div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><span class="fa fa-angle-left"><span></span></span></button><button type="button" role="presentation" class="owl-next"><span class="fa fa-angle-right"><span></span></span></button></div><div class="owl-dots disabled"></div>
+                </div>
+            </div>
+        </div>
+    }
+
+}

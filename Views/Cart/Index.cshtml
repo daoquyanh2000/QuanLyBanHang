@@ -26,7 +26,7 @@
                             @{ foreach (CartItem item in Model)
                                 {
                                     <tr>
-                                        <td class="shoping__cart__item">
+                                        <td class="shoping__cart__item d-flex align-items-center">
                                             <img style="width:100px; height:100px;object-fit:cover;" src="@item.Product.Images.Where(x=>x.IsPrimary==true).FirstOrDefault().ImageUrl" alt="">
                                             <h5>@item.Product.Title</h5>
                                         </td>
