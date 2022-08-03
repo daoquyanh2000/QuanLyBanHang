@@ -1,8 +1,5 @@
-﻿using System;
+﻿using QuanLyBanHang.DB.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using QuanLyBanHang.DB.Entities;
 
 namespace QuanLyBanHang.Areas.Admin.Models
 {
@@ -10,6 +7,5 @@ namespace QuanLyBanHang.Areas.Admin.Models
     {
         public List<IEnumerable<Product>> Products { get; set; }
         public string CategoryName { get; set; }
-
     }
 }

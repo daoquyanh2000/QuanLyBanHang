@@ -7,11 +7,10 @@
 
 <h2>Tạo mới</h2>
 
-
 @using (Html.BeginForm("Create", "Categories", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 
 {
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
 <div class="form-horizontal">
     <h4>Danh mục</h4>
@@ -49,7 +48,6 @@
             <table class="table" id="tableImage">
             </table>
         </div>
-
     </div>
     <h3>Danh sách sản phẩm</h3>
     <div class="table-responsive">
@@ -65,11 +63,11 @@
             <tbody>
                 @{ foreach (Product product in ViewBag.products)
                     {
-                        <tr>
-                            <td>@product.Title</td>
-                            <td>@product.Code</td>
-                            <td class="text-center"><input type="checkbox" name="ProductIds" value="@product.Id" /></td>
-                        </tr>
+                    <tr>
+                        <td>@product.Title</td>
+                        <td>@product.Code</td>
+                        <td class="text-center"><input type="checkbox" name="ProductIds" value="@product.Id" /></td>
+                    </tr>
 
                     }
                 }
@@ -106,7 +104,6 @@
                     </tr>
                     </thead>
 `;
-
 
         files = $(this)[0].files;
         for (let i = 0; i < files.length; i++) {

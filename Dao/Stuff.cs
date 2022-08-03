@@ -1,12 +1,10 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using Dapper.Contrib.Extensions;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-
 
 namespace QuanLyBanHang.Dao
 {

@@ -1,8 +1,7 @@
 ﻿namespace QuanLyBanHang.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class deleteCustomer : DbMigration
     {
         public override void Up()
@@ -16,23 +15,23 @@
             DropColumn("dbo.Order", "CustomerId");
             DropTable("dbo.Customer");
         }
-        
+
         public override void Down()
         {
             CreateTable(
                 "dbo.Customer",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        FullName = c.String(),
-                        Email = c.String(),
-                        Address = c.String(),
-                        Phone = c.String(),
-                        UserName = c.String(),
-                        Password = c.String(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    FullName = c.String(),
+                    Email = c.String(),
+                    Address = c.String(),
+                    Phone = c.String(),
+                    UserName = c.String(),
+                    Password = c.String(),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             AddColumn("dbo.Order", "CustomerId", c => c.Int(nullable: false));
             DropColumn("dbo.Order", "Phone");
             DropColumn("dbo.Order", "Address");

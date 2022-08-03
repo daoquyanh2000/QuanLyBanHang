@@ -14,7 +14,6 @@
         text-align: center;
 
         thead {
-
             tr {
                 border-bottom: 1px solid $border;
             }
@@ -32,9 +31,7 @@
         }
 
         tbody {
-
             tr {
-
                 td {
                     padding-top: 30px;
                     padding-bottom: 30px;
@@ -119,7 +116,8 @@
     }
 }
 
-.shoping__continue {}
+.shoping__continue {
+}
 
 .shoping__discount {
     margin-top: 45px;
@@ -132,7 +130,6 @@
     }
 
     form {
-
         input {
             width: 255px;
             height: 46px;

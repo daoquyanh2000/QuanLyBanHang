@@ -27,29 +27,29 @@
                     </div>
                 </div>
                 @*<div class="filter__item">
-            <div class="row">
-                <div class="col-lg-4 col-md-5">
-                    <div class="filter__sort">
-                        <span>Sort By</span>
-                        <select>
-                            <option value="0">Default</option>
-                            <option value="0">Default</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="filter__found">
-                        <h6><span>16</span> Products found</h6>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-3">
-                    <div class="filter__option">
-                        <span class="icon_grid-2x2"></span>
-                        <span class="icon_ul"></span>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5">
+                                <div class="filter__sort">
+                                    <span>Sort By</span>
+                                    <select>
+                                        <option value="0">Default</option>
+                                        <option value="0">Default</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    <h6><span>16</span> Products found</h6>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-3">
+                                <div class="filter__option">
+                                    <span class="icon_grid-2x2"></span>
+                                    <span class="icon_ul"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
                 <div class="section-title product__discount__title">
                     <h2>Sản phẩm</h2>
                 </div>
@@ -57,6 +57,9 @@
 
                     @{ foreach (var product in Model)
                         {
+
+                            var price = (product.Price * (1 - (double)product.Discount / 100));
+
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="@product.Images.Where(x => x.IsPrimary == true).First().ImageUrl">
@@ -66,23 +69,25 @@
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a href="#">@product.Title</a></h6>
-                                        <h5>@product.Price &#8363;</h5>
+                                        <div style="">
+                                            <span style="text-decoration: line-through; font-size: 14px;" class="text-muted">@string.Format("{0:#,##0}", Convert.ToDecimal(product.Price)) &#8363;</span>
+                                            <span style="color: red; font-weight: 700;">@string.Format("{0:#,##0}", Convert.ToDecimal(price)) &#8363;</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         }
                     }
-
                 </div>
                 <div class="product__pagination">
                     @(pagedList.PageCount < pagedList.PageNumber ? 0 : pagedList.PageNumber) / @pagedList.PageCount
 
                     @Html.PagedListPager(pagedList, page => Url.Action("Index",
-                        new { page }))@{
+                        new { Page = page }))@{
 
                         }
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>

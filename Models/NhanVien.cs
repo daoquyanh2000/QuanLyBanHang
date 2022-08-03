@@ -1,9 +1,5 @@
 ﻿using Dapper.Contrib.Extensions;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace QuanLyBanHang.Models
 {
@@ -12,6 +8,7 @@ namespace QuanLyBanHang.Models
     {
         [Dapper.Contrib.Extensions.Key]
         public long ID { get; set; }
+
         [Display(Name = "Tên người dùng")]
         public string HoTen { get; set; }
 
@@ -21,11 +18,13 @@ namespace QuanLyBanHang.Models
 
         [Display(Name = "Mật khẩu")]
         public string MatKhau { get; set; }
-        [Display(Name = "Trạng thái")]
 
+        [Display(Name = "Trạng thái")]
         public int TrangThai { get; set; }
+
         [Display(Name = "Số điện thoại")]
         public string SDT { get; set; }
+
         public string Email { get; set; }
     }
 }

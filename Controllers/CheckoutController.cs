@@ -4,12 +4,10 @@ using QuanLyBanHang.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace QuanLyBanHang.Controllers
 {
-
     public class CheckoutController : Controller
     {
         private const string CartSession = "CartSession";
@@ -20,11 +18,11 @@ namespace QuanLyBanHang.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(Order order,Customer customer)
+        public ActionResult Index(Order order, Customer customer)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 var listItem = (List<CartItem>)Session[CartSession];
                 var total = listItem.Sum(x => x.Quantity * x.Price);
@@ -48,13 +46,15 @@ namespace QuanLyBanHang.Controllers
                 db.Orders.Add(order);
                 db.SaveChanges();
                 Session[CartSession] = new List<CartItem>();
-                return Json(new{status=true}, JsonRequestBehavior.AllowGet);
+                return Json(new { status = true }, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("index", "Home");
             }
             else
             {
                 return View(customer);
             }
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -64,5 +64,4 @@ namespace QuanLyBanHang.Controllers
             base.Dispose(disposing);
         }
     }
-
 }

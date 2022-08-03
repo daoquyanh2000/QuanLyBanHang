@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ogani | Template</title>
+    <title>ELÉCTRICO</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="~/Assets/Client/css/bootstrap.min.css" type="text/css">
@@ -46,10 +48,10 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="~/Assets/Client/img/language.png" alt="">
-                <div>English</div>
+                <div>Tiếng Việt</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Spanis</a></li>
+                    <li><a href="#">Tiếng Việt</a></li>
                     <li><a href="#">English</a></li>
                 </ul>
             </div>
@@ -58,17 +60,17 @@
             <ul>
                 <li class=""><a href="/Home">Trang chính</a></li>
                 <li><a href="/Product">Sản phẩm</a></li>
-@*                <li>
-                    <a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>*@
+                @*                <li>
+                        <a href="#">Pages</a>
+                        <ul class="header__menu__dropdown">
+                            <li><a href="./shop-details.html">Shop Details</a></li>
+                            <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                            <li><a href="./checkout.html">Check Out</a></li>
+                            <li><a href="./blog-details.html">Blog Details</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="./blog.html">Blog</a></li>
+                    <li><a href="./contact.html">Contact</a></li>*@
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -81,7 +83,7 @@
         <div class="humberger__menu__contact">
             <ul>
                 <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Miễn phí vận chuyển cho đơn hàng từ 300.000 trở lên</li>
+                <li>Miễn phí vận chuyển cho đơn hàng từ 300.000&#8363; trở lên</li>
             </ul>
         </div>
     </div>
@@ -95,7 +97,7 @@
                         <div class="header__top__left">
                             <ul>
                                 <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Miễn phí vận chuyển cho đơn hàng từ 300.000 trở lên</li>
+                                <li>Miễn phí vận chuyển cho đơn hàng từ 300.000&#8363; trở lên</li>
                             </ul>
                         </div>
                     </div>
@@ -109,7 +111,7 @@
                             </div>
                             <div class="header__top__right__language">
                                 <img src="~/Assets/Client/img/language.png" alt="">
-                                <div>English</div>
+                                <div>Tiếng Việt</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <li><a href="#">Tiếng Việt</a></li>
@@ -133,22 +135,22 @@
                         <ul>
                             <li class=""><a href="/Home">Trang chính</a></li>
                             <li><a href="/Product">Sản phẩm</a></li>
-@*                            <li>
-                                <a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="/contact">Contact</a></li>*@
+                            @*                            <li>
+                                    <a href="#">Pages</a>
+                                    <ul class="header__menu__dropdown">
+                                        <li><a href="./shop-details.html">Shop Details</a></li>
+                                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                        <li><a href="./checkout.html">Check Out</a></li>
+                                        <li><a href="./blog-details.html">Blog Details</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/contact">Contact</a></li>*@
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
-                        @{ 
+                        @{
                             Html.RenderAction("PartialCart", "Cart");
                         }
                     </div>
@@ -163,7 +165,6 @@
 
     @RenderBody()
 
-  
     <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">
@@ -237,9 +238,8 @@
     </footer>
     <!-- Footer Section End -->
     <!-- Js Plugins -->
- 
-    <script src="~/Assets/Client/js/main.js"></script>
 
+    <script src="~/Assets/Client/js/main.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>

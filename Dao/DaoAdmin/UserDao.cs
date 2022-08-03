@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace QuanLyBanHang.Dao.DaoAdmin
+﻿namespace QuanLyBanHang.Dao.DaoAdmin
 {
     public class UserDao
     {
-
     }
 }

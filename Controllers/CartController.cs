@@ -3,12 +3,14 @@ using QuanLyBanHang.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+
 namespace QuanLyBanHang.Controllers
 {
     public class CartController : Controller
     {
         private const string CartSession = "CartSession";
         private StoreContext db = new StoreContext();
+
         // GET: Cart
         public ActionResult Index()
         {
@@ -21,6 +23,7 @@ namespace QuanLyBanHang.Controllers
             }
             return View(list);
         }
+
         public ActionResult PartialCart()
         {
             var cart = Session[CartSession];
@@ -40,6 +43,7 @@ namespace QuanLyBanHang.Controllers
             }
             return PartialView(partialCart);
         }
+
         public ActionResult AddItem(int ProductId, int quantity)
         {
             var product = db.Products.Find(ProductId);
@@ -51,13 +55,11 @@ namespace QuanLyBanHang.Controllers
                 {
                     foreach (var item in list)
                     {
-
                         if (item.Product.Id == ProductId)
                         {
                             item.Quantity += quantity;
-                            item.Price = product.Price * (1 - (double)product.Discount/100);
+                            item.Price = product.Price * (1 - (double)product.Discount / 100);
                         }
-
                     }
                 }
                 else
@@ -82,6 +84,7 @@ namespace QuanLyBanHang.Controllers
             }
             return Json(new { Result = "OK" });
         }
+
         public ActionResult UpdateCart(List<UpdateCartDto> updates)
         {
             var list = new List<CartItem>();

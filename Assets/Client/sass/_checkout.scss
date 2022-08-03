@@ -27,7 +27,6 @@
 }
 
 .checkout__form {
-
     h4 {
         color: $normal-color;
         font-weight: 700;
@@ -87,8 +86,7 @@
             visibility: hidden;
 
             &:checked {
-
-                &~.checkmark {
+                & ~ .checkmark {
                     background: $primary-color;
                     border-color: $primary-color;
 
@@ -183,7 +181,6 @@
     }
 
     .checkout__input__checkbox {
-
         label {
             padding-left: 20px;
         }

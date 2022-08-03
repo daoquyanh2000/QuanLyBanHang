@@ -7,11 +7,10 @@
 
 <h2>Sửa</h2>
 
-
 @using (Html.BeginForm("Edit", "Products", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 
 {
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
 <div class="form-horizontal">
     <h4>Sản phẩm</h4>
@@ -123,24 +122,23 @@
                             Chọn ảnh chính
                         </th>
                         <th>
-
                         </th>
                     </tr>
                 </thead>
                 @foreach (var item in Model.Images)
                 {
-                    <tr>
-                        <td>
-                            @item.ImageName
-                        </td>
-                        <td>
-                            <img src="@item.ImageUrl" alt="Alternate Text" style="width:100px" />
-                        </td>
-                        <td>
-                            <input type="radio" name="SelectedImage" checked="@item.IsPrimary" data-id="@item.Id" class="changePrimaryImage">
-                        </td>
-                        <td>    <button type="button" class="btn btn-danger deleteItem" data-id="@item.Id">Xóa</button></td>
-                    </tr>
+                <tr>
+                    <td>
+                        @item.ImageName
+                    </td>
+                    <td>
+                        <img src="@item.ImageUrl" alt="Alternate Text" style="width:100px" />
+                    </td>
+                    <td>
+                        <input type="radio" name="SelectedImage" checked="@item.IsPrimary" data-id="@item.Id" class="changePrimaryImage">
+                    </td>
+                    <td>    <button type="button" class="btn btn-danger deleteItem" data-id="@item.Id">Xóa</button></td>
+                </tr>
                 }
             </table>
         </div>
@@ -155,7 +153,6 @@
 
 <div>
     @Html.ActionLink("Quay lại", "Index")
-
 </div>
 
 @section Scripts {

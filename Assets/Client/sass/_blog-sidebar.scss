@@ -15,7 +15,6 @@
     }
 
     ul {
-
         li {
             list-style: none;
 
@@ -68,7 +67,6 @@
 }
 
 .blog__sidebar__recent {
-
     .blog__sidebar__recent__item {
         display: block;
 
@@ -77,8 +75,6 @@
         }
     }
 }
-
-
 
 .blog__sidebar__recent__item {
     overflow: hidden;
@@ -108,7 +104,6 @@
 }
 
 .blog__sidebar__item__tags {
-
     a {
         font-size: 16px;
         color: $para-color;

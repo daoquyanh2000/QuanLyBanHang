@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using PagedList;
+﻿using PagedList;
 using QuanLyBanHang.Areas.Admin.Models;
 using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
+using System;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
@@ -49,7 +46,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // POST: Admin/ProductTypes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -108,7 +105,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // POST: Admin/ProductTypes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

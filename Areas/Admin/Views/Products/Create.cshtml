@@ -7,10 +7,9 @@
 
 <h2>Tạo sản phẩm mới</h2>
 
-
 @using (Html.BeginForm("Create", "Products", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
 <div class="form-horizontal">
     <h4>Product Information</h4>
@@ -111,7 +110,6 @@
             <table class="table" id="tableImage">
             </table>
         </div>
-
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -145,7 +143,6 @@
                     </tr>
                     </thead>
 `;
-
 
         files = $(this)[0].files;
         for (let i = 0; i < files.length;i++) {

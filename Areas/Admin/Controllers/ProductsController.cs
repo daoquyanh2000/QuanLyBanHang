@@ -1,18 +1,16 @@
-﻿using System;
+﻿using MoreLinq;
+using PagedList;
+using QuanLyBanHang.DB;
+using QuanLyBanHang.DB.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MoreLinq;
-using PagedList;
-using QuanLyBanHang.Areas.Admin.Models;
-using QuanLyBanHang.DB;
-using QuanLyBanHang.DB.Entities;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
@@ -26,7 +24,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             int pageNumber = (page ?? 1);
             int pageSizeNumber = 9;
             var products = db.Products.Include(p => p.ProductType).Include(p => p.Supplier);
-            return View(products.ToList().OrderByDescending(p=>p.Id).ToPagedList(pageNumber, pageSizeNumber));
+            return View(products.ToList().OrderByDescending(p => p.Id).ToPagedList(pageNumber, pageSizeNumber));
         }
 
         // GET: Admin/Products/Details/5
@@ -54,11 +52,11 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // POST: Admin/Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product,int? selectedImage)
+        public ActionResult Create(Product product, int? selectedImage)
         {
             string pathFolder = "/Assets/Admin/image/";
             if (!Directory.Exists(pathFolder))
@@ -73,7 +71,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                     var file = Request.Files[i];
                     if (file != null && file.ContentLength > 0)
                     {
-                        var fileName = DateTime.Now.Ticks.ToString() + "_"+ Path.GetFileName(file.FileName);
+                        var fileName = DateTime.Now.Ticks.ToString() + "_" + Path.GetFileName(file.FileName);
                         //save file
                         var path = Path.Combine(Server.MapPath(pathFolder), fileName);
                         file.SaveAs(path);
@@ -91,7 +89,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 }
                 product.Images = images;
                 //set the first image is primary
-                if (selectedImage == null && images.Count>0)
+                if (selectedImage == null && images.Count > 0)
                 {
                     product.Images.FirstOrDefault().IsPrimary = true;
                 }
@@ -112,7 +110,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
-            Image selectedIamge = db.Images.Where(i => i.IsPrimary == true && i.ProductId==id).FirstOrDefault();
+            Image selectedIamge = db.Images.Where(i => i.IsPrimary == true && i.ProductId == id).FirstOrDefault();
             if (product == null)
             {
                 return HttpNotFound();
@@ -123,7 +121,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // POST: Admin/Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -161,9 +159,10 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             return View(product);
         }
+
         //delete product image
         [HttpPost]
-        public ActionResult ChangePrimaryImage( int productId,int imageId)
+        public ActionResult ChangePrimaryImage(int productId, int imageId)
         {
             var product = db.Products.Find(productId);
             var images = product.Images;
@@ -181,10 +180,9 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             db.SaveChanges();
 
             return Json(new { Result = "OK" });
-
         }
-        [HttpPost]
 
+        [HttpPost]
         public ActionResult UploadFile(int productId)
         {
             var product = db.Products.Find(productId);
@@ -221,6 +219,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             return Json(new { data = "OK" });
         }
+
         public JsonResult DeleteFile(int id)
         {
             if (String.IsNullOrEmpty(id.ToString()))
@@ -255,6 +254,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                 return Json(new { Result = "ERROR", Message = ex.Message });
             }
         }
+
         // POST: Admin/Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -9,7 +9,6 @@
     padding: 10px 0 13px;
 
     ul {
-
         li {
             font-size: 14px;
             color: #1c1c1c;
@@ -84,7 +83,6 @@
     cursor: pointer;
 
     &:hover {
-
         ul {
             top: 23px;
             opacity: 1;
@@ -172,7 +170,6 @@
     padding: 24px 0;
 
     ul {
-
         li {
             list-style: none;
             display: inline-block;
@@ -196,8 +193,7 @@
                     display: block;
 
                     &:hover {
-
-                        &>a {
+                        & > a {
                             color: $primary-color;
                         }
                     }
@@ -212,21 +208,19 @@
             }
 
             &.active {
-
                 a {
                     color: $primary-color;
                 }
             }
 
             &:hover {
-
                 .header__menu__dropdown {
                     top: 30px;
                     opacity: 1;
                     visibility: visible;
                 }
 
-                &>a {
+                & > a {
                     color: $primary-color;
                 }
             }

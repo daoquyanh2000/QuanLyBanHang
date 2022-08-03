@@ -2,11 +2,11 @@
 
 namespace QuanLyBanHang.Areas.admin
 {
-    public class adminAreaRegistration : AreaRegistration 
+    public class adminAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "admin";
             }

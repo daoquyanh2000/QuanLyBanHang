@@ -9,10 +9,9 @@
 
 <h2>Sửa</h2>
 
-
 @using (Html.BeginForm("Edit", "ProductTypes", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
 <div class="form-horizontal">
     <h4>Loại sản phẩm</h4>
@@ -59,7 +58,6 @@
             <table class="table" id="tableImage">
             </table>
         </div>
-
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

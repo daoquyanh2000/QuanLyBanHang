@@ -1,8 +1,7 @@
 ﻿namespace QuanLyBanHang.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class updateRequiredField : DbMigration
     {
         public override void Up()
@@ -27,7 +26,7 @@
             AlterColumn("dbo.User", "FullName", c => c.String(nullable: false));
             AlterColumn("dbo.User", "Email", c => c.String(nullable: false));
         }
-        
+
         public override void Down()
         {
             AlterColumn("dbo.User", "Email", c => c.String());

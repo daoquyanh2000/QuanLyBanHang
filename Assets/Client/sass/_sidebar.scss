@@ -15,7 +15,6 @@
     }
 
     ul {
-
         li {
             list-style: none;
 
@@ -36,7 +35,6 @@
         }
 
         .owl-carousel {
-
             .owl-nav {
                 right: 0;
             }
@@ -45,7 +43,6 @@
 }
 
 .price-range-wrap {
-
     .range-slider {
         margin-top: 20px;
 
@@ -110,9 +107,7 @@
     width: 40%;
 
     &.sidebar__item__color--white {
-
         label {
-
             &:after {
                 border: 2px solid #333333;
                 background: transparent;
@@ -121,9 +116,7 @@
     }
 
     &.sidebar__item__color--gray {
-
         label {
-
             &:after {
                 background: #E9A625;
             }
@@ -131,9 +124,7 @@
     }
 
     &.sidebar__item__color--red {
-
         label {
-
             &:after {
                 background: #D62D2D;
             }
@@ -141,9 +132,7 @@
     }
 
     &.sidebar__item__color--black {
-
         label {
-
             &:after {
                 background: $heading-color-2;
             }
@@ -151,9 +140,7 @@
     }
 
     &.sidebar__item__color--blue {
-
         label {
-
             &:after {
                 background: #249BC8;
             }
@@ -161,9 +148,7 @@
     }
 
     &.sidebar__item__color--green {
-
         label {
-
             &:after {
                 background: #3CC032;
             }

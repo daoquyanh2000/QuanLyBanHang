@@ -12,7 +12,6 @@
 
         <p>
             @Html.ActionLink("Thêm nhân viên mới", "Create", "User", new {}, new { @class = "btn btn-primary" })
-
         </p>
         <table class="table table-bordered table-striped">
             <tr>
@@ -41,41 +40,40 @@
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HoTen)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TenTaiKhoan)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MatKhau)
-                    </td>
-                    @if (item.TrangThai == 0)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenTaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+                @if (item.TrangThai == 0)
                     {
-                        <td>
-                            Khóa
-                        </td>
+                <td>
+                    Khóa
+                </td>
                     }
                     else
                     {
-                        <td>
-                            Đang hoạt động
-                        </td>
+                <td>
+                    Đang hoạt động
+                </td>
                     }
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SDT)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Xóa", "Delete", "User", new { id= item.ID }, new { onclick = "return confirm('Bạn thực sự muốn xóa bản ghi này?');" })
-                    </td>
-                </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Xóa", "Delete", "User", new { id= item.ID }, new { onclick = "return confirm('Bạn thực sự muốn xóa bản ghi này?');" })
+                </td>
+            </tr>
             }
-
         </table>
         <!-- Thêm mã phân trang -->
         <br />
@@ -84,6 +82,5 @@
         @Html.PagedListPager(Model, page => Url.Action("Index",
             new { page }))
         <!-- Kết thúc -->
-
     </div>
 </main>

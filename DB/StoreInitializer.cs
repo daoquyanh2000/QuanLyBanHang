@@ -1,11 +1,10 @@
-﻿using System;
+﻿using QuanLyBanHang.DB.Entities;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using QuanLyBanHang.DB.Entities;
+
 namespace QuanLyBanHang.DB
 {
-    public class StoreInitializer: System.Data.Entity.DropCreateDatabaseIfModelChanges<StoreContext>
+    public class StoreInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<StoreContext>
     {
         protected override void Seed(StoreContext context)
         {

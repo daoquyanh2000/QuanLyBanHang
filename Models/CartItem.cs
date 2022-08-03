@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using QuanLyBanHang.DB.Entities;
+﻿using QuanLyBanHang.DB.Entities;
+using System;
+
 namespace QuanLyBanHang.Models
 {
     [Serializable]

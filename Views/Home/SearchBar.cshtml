@@ -12,9 +12,8 @@
                     <ul>
                         @foreach (var item in Model)
                         {
-                            <li><a href="/Product?ProductTypeId=@item.Id">@item.Name</a></li>
+                        <li><a href="/Product?ProductTypeId=@item.ID">@item.Name</a></li>
                         }
-
                     </ul>
                 </div>
             </div>
@@ -25,7 +24,6 @@
                             <input type="text" id="search-input" placeholder="Bạn đang cần gì?">
                             <button type="button" id="search-btn" class="site-btn">Tìm kiếm</button>
                         </form>
-
                     </div>
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">

@@ -52,43 +52,43 @@
 
         @foreach (var item in Model)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Supplier.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Origin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @{ foreach (var category in item.Categories)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Origin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+                @{ foreach (var category in item.Categories)
                 {
                     <span class="badge bg-info mr-2">@category.Name</span>
                 }
-            }
-        </td>
-        <td>
-            @if (item.Images.Count() == 0)
+                }
+            </td>
+            <td>
+                @if (item.Images.Count() == 0)
             {
                 <span>Không có ảnh</span>
             }
@@ -96,13 +96,13 @@
             {
                 <span>@item.Images.Count() ảnh <span>  (@item.Images.Where(x=>x.IsPrimary==true).Count())</span></span>
             }
-    </td>
-    <td>
-        @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
-    </td>
-    </tr>
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+            </td>
+        </tr>
         }
     </table>
 </div>

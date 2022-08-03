@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using PagedList;
+using QuanLyBanHang.Areas.Admin.Models;
 using QuanLyBanHang.DB;
 using QuanLyBanHang.DB.Entities;
-using QuanLyBanHang.Areas.Admin.Models;
-using PagedList;
+using System;
+using System.Data;
+using System.Data.Entity;
 using System.IO;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
@@ -23,7 +21,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         {
             int pageNumber = (page ?? 1);
             int pageSizeNumber = 4;
-            var paged = db.Categories.OrderByDescending(x=>x.Id).ToList().ToPagedList(pageNumber, pageSizeNumber);
+            var paged = db.Categories.OrderByDescending(x => x.Id).ToList().ToPagedList(pageNumber, pageSizeNumber);
             return View(paged);
         }
 
@@ -51,7 +49,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // POST: Admin/Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -107,7 +105,6 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                     db.Entry(category).State = EntityState.Added;
                     db.Categories.Add(category);
                     db.SaveChanges();
-
                 }
 
                 return RedirectToAction("Index");
@@ -134,7 +131,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // POST: Admin/Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -209,6 +206,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             return View(category);
         }
+
         // GET: Admin/Categories/Delete/5
         public ActionResult Delete(int? id)
         {

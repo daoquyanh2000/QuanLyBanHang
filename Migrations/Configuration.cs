@@ -1,11 +1,10 @@
 ﻿namespace QuanLyBanHang.Migrations
 {
+    using QuanLyBanHang.DB.Entities;
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
-    using QuanLyBanHang.DB.Entities;
+
     internal sealed class Configuration : DbMigrationsConfiguration<QuanLyBanHang.DB.StoreContext>
     {
         public Configuration()

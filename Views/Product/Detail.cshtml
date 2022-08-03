@@ -18,8 +18,8 @@
                     <div class="product__details__pic__slider owl-carousel">
                         @{ foreach (var image in Model.Images.ToList())
                             {
-                                <img style="width:100px;height:100px;object-fit:cover" data-imgbigurl="@image.ImageUrl"
-                                     src="@image.ImageUrl" alt="">
+                            <img style="width:100px;height:100px;object-fit:cover" data-imgbigurl="@image.ImageUrl"
+                                 src="@image.ImageUrl" alt="">
 
                             }}
                     </div>
@@ -30,15 +30,14 @@
                     <h3>@Model.Title</h3>
                     @{ if (Model.Discount > 0)
                         {
-                            <div class="product__details__price">
-                    <span style="text-decoration:line-through;">@Model.Price</span>
-                    <span style="padding-left:5px">@price.ToString()&#8363;</span>
-                    
-                            </div>
+                        <div class="product__details__price">
+                            <span style="text-decoration:line-through;font-weight:400" >@string.Format("{0:#,##0}", Convert.ToDecimal(Model.Price)) &#8363;</span>
+                            <span style="padding-left:5px ;color:red">@string.Format("{0:#,##0}", Convert.ToDecimal(price))&#8363;</span>
+                        </div>
                         }
                         else
                         {
-                            <div class="product__details__price">@Model.Price &#8363;</div>
+                        <div class="product__details__price">@string.Format("{0:#,##0}", Convert.ToDecimal(Model.Price)) &#8363;</div>
                         }
                     }
                     <p>
@@ -51,13 +50,13 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn disabled"  id="add-to-cart">ADD TO CARD</a>
-                    
+                    <a href="#" class="primary-btn disabled" id="add-to-cart">Thêm vào giỏ hàng</a>
+
                     <ul>
-                        <li><b>Availability</b> <span>@Model.Stock</span></li>
-                        <li><b>Origin</b> <span>@Model.Origin</span></li>
+                        <li><b>Tồn kho</b> <span>@Model.Stock</span></li>
+                        <li><b>Xuất xứ</b> <span>@Model.Origin</span></li>
                         <li>
-                            <b>Share on</b>
+                            <b>Chia sẻ</b>
                             <div class="share">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -73,13 +72,13 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                               aria-selected="true">Description</a>
+                               aria-selected="true">Mô tả</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Products Infomation</h6>
+                                <h6>Thông tin sản phẩm</h6>
                                 <p>@Model.Description</p>
                             </div>
                         </div>
@@ -95,7 +94,7 @@
 <script>
     $("#add-to-cart").on("click", () => {
         if (@Model.Stock== 0) {
-            alert("Out of stock!")
+            alert("Đã hết hàng!")
             return false;
         }
         let quantity = $("#quantity").val()
@@ -108,4 +107,3 @@
         })
     })
 </script>
-

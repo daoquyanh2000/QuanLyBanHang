@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PagedList;
+using QuanLyBanHang.DB;
+using QuanLyBanHang.DB.Entities;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using PagedList;
-using QuanLyBanHang.DB;
-using QuanLyBanHang.DB.Entities;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
 {
@@ -22,7 +19,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             //hello ae
             int pageNumber = (page ?? 1);
             int pageSizeNumber = 9;
-            return View(db.Orders.OrderByDescending(x=>x.CreatedTime).ToPagedList(pageNumber, pageSizeNumber));
+            return View(db.Orders.OrderByDescending(x => x.CreatedTime).ToPagedList(pageNumber, pageSizeNumber));
         }
 
         // GET: Admin/Orders/Details/5
@@ -39,6 +36,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             return View(order);
         }
+
         [HttpPost]
         public ActionResult Create()
         {
@@ -46,7 +44,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // POST: Admin/Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -80,11 +78,11 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
         }
 
         // POST: Admin/Orders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int deliveryEmployeesId,int Id)
+        public ActionResult Edit(int deliveryEmployeesId, int Id)
         {
             if (ModelState.IsValid)
             {
@@ -96,6 +94,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             }
             return View();
         }
+
         // GET: Admin/Orders/Delete/5
         public ActionResult Delete(int? id)
         {

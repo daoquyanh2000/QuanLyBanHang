@@ -27,15 +27,12 @@
 }
 
 .categories__slider {
-
     .col-lg-3 {
         max-width: 100%;
     }
 
     &.owl-carousel {
-
         .owl-nav {
-
             button {
                 font-size: 18px;
                 color: $normal-color;
@@ -72,7 +69,6 @@
     margin-bottom: 50px;
 
     ul {
-
         li {
             list-style: none;
             font-size: 18px;
@@ -83,7 +79,6 @@
             cursor: pointer;
 
             &.active {
-
                 &:after {
                     opacity: 1;
                 }
@@ -111,9 +106,7 @@
     margin-bottom: 50px;
 
     &:hover {
-
         .featured__item__pic {
-
             .featured__item__pic__hover {
                 bottom: 20px;
             }
@@ -146,7 +139,6 @@
         }
 
         &:hover {
-
             a {
                 background: $primary-color;
                 border-color: $primary-color;
@@ -207,7 +199,6 @@
 }
 
 .latest-product__text {
-
     h4 {
         font-weight: 700;
         color: $normal-color;
@@ -216,9 +207,7 @@
 }
 
 .latest-product__slider {
-
     &.owl-carousel {
-
         .owl-nav {
             position: absolute;
             right: 20px;

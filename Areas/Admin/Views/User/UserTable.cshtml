@@ -37,19 +37,19 @@
 
                 @if (@item.TrangThai == 1)
                 {
-                    <td>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="button-@item.ID" checked onchange="ChangeState(@item.ID)">
-                        </div>
-                    </td>
+                <td>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="button-@item.ID" checked onchange="ChangeState(@item.ID)">
+                    </div>
+                </td>
                 }
                 else
                 {
-                    <td>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="button-@item.ID" onchange="ChangeState(@item.ID)">
-                        </div>
-                    </td>
+                <td>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="button-@item.ID" onchange="ChangeState(@item.ID)">
+                    </div>
+                </td>
                 }
 
                 <td>@item.NgayTao</td>
@@ -72,9 +72,8 @@
             </tr>
 
         }
-
-            </tbody>
-        </table>
+        </tbody>
+    </table>
     <!-- Thêm phân trang vào -->
     Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
 
@@ -85,4 +84,3 @@ PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMe
     <!-- Kết thúc -->
 </div>
 <!-- table end -->
-

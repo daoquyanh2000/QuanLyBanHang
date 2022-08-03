@@ -1,22 +1,28 @@
 ﻿@model List<QuanLyBanHang.DB.Entities.Product>
+
 @{ foreach (var product in Model)
     {
-        <div class="col-lg-4">
-            <div class="product__discount__item">
-                <div class="product__discount__item__pic set-bg"
-                     data-setbg="@product.Images.Where(x=>x.IsPrimary==true).FirstOrDefault().ImageUrl">
-                    <div class="product__discount__percent">@product.Discount.ToString() %</div>
-                    <ul class="product__item__pic__hover">
-                        <li><a href="/Product/Detail?ProductId=@product.Id"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
-                </div>
-                <div class="product__discount__item__text">
-                    <span>@product.ProductType.Name</span>
-                    <h5><a href="#">@product.Title</a></h5>
-
-                    <div class="product__item__price">@(product.Price * (1 - (double)product.Discount / 100)) &#8363;<span style="text-decoration:line-through;">@product.Price &#8363;</span></div>
+    <div class="col-lg-4">
+        <div class="product__discount__item">
+            <div class="product__discount__item__pic set-bg"
+                 data-setbg="@product.Images.Where(x=>x.IsPrimary==true).FirstOrDefault().ImageUrl">
+                <div class="product__discount__percent">@product.Discount.ToString() %</div>
+                <ul class="product__item__pic__hover">
+                    <li><a href="/Product/Detail?ProductId=@product.Id"><i class="fa fa-shopping-cart"></i></a></li>
+                </ul>
+            </div>
+            <div class="product__discount__item__text">
+                <span>@product.ProductType.Name</span>
+                <h5><a href="#">@product.Title</a></h5>
+                @{
+                        var price = (product.Price * (1 - (double)product.Discount / 100));
+                }
+                <div class="product__item__price" style="color: red ">
+                    <span style="text-decoration:line-through;padding-left:5px">@string.Format("{0:#,##0}", Convert.ToDecimal(product.Price))&#8363;</span>
+                    @string.Format("{0:#,##0}", Convert.ToDecimal(price)) &#8363;
                 </div>
             </div>
         </div>
+    </div>
     }
 }

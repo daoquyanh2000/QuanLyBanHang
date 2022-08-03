@@ -25,11 +25,8 @@
 }
 
 .product__discount__item {
-
     &:hover {
-
         .product__discount__item__pic {
-
             .product__item__pic__hover {
                 bottom: 20px;
             }
@@ -75,7 +72,6 @@
         }
 
         &:hover {
-
             a {
                 background: $primary-color;
                 border-color: $primary-color;
@@ -143,13 +139,11 @@
 }
 
 .product__discount__slider {
-
     .col-lg-4 {
         max-width: 100%;
     }
 
     &.owl-carousel {
-
         .owl-dots {
             text-align: center;
             margin-top: 30px;
@@ -280,9 +274,7 @@
     margin-bottom: 50px;
 
     &:hover {
-
         .product__item__pic {
-
             .product__item__pic__hover {
                 bottom: 20px;
             }
@@ -314,7 +306,6 @@
         }
 
         &:hover {
-
             a {
                 background: $primary-color;
                 border-color: $primary-color;
