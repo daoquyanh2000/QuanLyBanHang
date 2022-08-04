@@ -6,6 +6,7 @@
     var quantity = 1;
     var price = Model.Price * (1 - (double)Model.Discount / 100);
 }
+@{ Html.RenderAction("SearchBar", "Home");}
 <section class="product-details spad">
     <div class="container">
         <div class="row">
@@ -18,8 +19,8 @@
                     <div class="product__details__pic__slider owl-carousel">
                         @{ foreach (var image in Model.Images.ToList())
                             {
-                            <img style="width:100px;height:100px;object-fit:cover" data-imgbigurl="@image.ImageUrl"
-                                 src="@image.ImageUrl" alt="">
+                                <img style="width:100px;height:100px;object-fit:cover" data-imgbigurl="@image.ImageUrl"
+                                     src="@image.ImageUrl" alt="">
 
                             }}
                     </div>
@@ -30,14 +31,14 @@
                     <h3>@Model.Title</h3>
                     @{ if (Model.Discount > 0)
                         {
-                        <div class="product__details__price">
-                            <span style="text-decoration:line-through;font-weight:400" >@string.Format("{0:#,##0}", Convert.ToDecimal(Model.Price)) &#8363;</span>
-                            <span style="padding-left:5px ;color:red">@string.Format("{0:#,##0}", Convert.ToDecimal(price))&#8363;</span>
-                        </div>
+                            <div class="product__details__price">
+                                <span style="text-decoration:line-through;font-weight:400">@string.Format("{0:#,##0}", Convert.ToDecimal(Model.Price)) &#8363;</span>
+                                <span style="padding-left:5px ;color:red">@string.Format("{0:#,##0}", Convert.ToDecimal(price))&#8363;</span>
+                            </div>
                         }
                         else
                         {
-                        <div class="product__details__price">@string.Format("{0:#,##0}", Convert.ToDecimal(Model.Price)) &#8363;</div>
+                            <div class="product__details__price">@string.Format("{0:#,##0}", Convert.ToDecimal(Model.Price)) &#8363;</div>
                         }
                     }
                     <p>
