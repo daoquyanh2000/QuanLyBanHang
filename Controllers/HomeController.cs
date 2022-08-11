@@ -1,30 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using QuanLyBanHang.DB;
+using QuanLyBanHang.DB.Entities;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace QuanLyBanHang.Controllers
 {
     public class HomeController : Controller
     {
+        private StoreContext db = new StoreContext();
+
         public ActionResult Index()
         {
-            return View();
+            var productTypes = db.ProductTypes.ToList().Where(x => x.Status == ProductTypeStatus.Active);
+            return View(productTypes);
         }
 
-        public ActionResult About()
+        public ActionResult SearchBar()
         {
-            ViewBag.Message = "Your application description page.";
+            var categories = db.ProductTypes.Where(x => x.Status == ProductTypeStatus.Active).ToList();
 
-            return View();
+            return PartialView(categories);
         }
 
-        public ActionResult Contact()
+        protected override void Dispose(bool disposing)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

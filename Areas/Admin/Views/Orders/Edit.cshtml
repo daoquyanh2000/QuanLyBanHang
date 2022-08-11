@@ -1,0 +1,92 @@
+﻿@model QuanLyBanHang.DB.Entities.Order
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.FullName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.FullName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Phone)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Phone)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Status)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Status)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.CreatedTime)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.CreatedTime)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Total)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Total)
+    </dd>
+</dl>
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-md-2" for="deliveryEmployeesId">Delivery employees</label>
+        <div class="col-md-10">
+            @Html.DropDownList("deliveryEmployeesId", null, htmlAttributes: new { @class = "form-select" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Confirm" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

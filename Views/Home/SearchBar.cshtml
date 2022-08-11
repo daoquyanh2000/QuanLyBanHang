@@ -1,0 +1,61 @@
+﻿@model IEnumerable<QuanLyBanHang.DB.Entities.ProductType>
+
+<section class="hero hero-normal">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Loại sản phẩm</span>
+                    </div>
+                    <ul>
+                        @foreach (var item in Model)
+                        {
+                        <li><a href="/Product?ProductTypeId=@item.ID">@item.Name</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form id="search-form">
+                            <input type="text" id="search-input" placeholder="Bạn đang cần gì?">
+                            <button type="button" id="search-btn" class="site-btn">Tìm kiếm</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>+65 11.188.888</h5>
+                            <span>Hỗ trợ 24/7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $('.site-btn').on('click', function () {
+            let keyword = $('#search-input').val();
+            var url ="@Url.Action("index","product",new {keyword = "__keyword__" })"
+            window.location.href = url.replace('__keyword__', keyword);
+    })
+    var input = document.getElementById("search-input");
+
+    // Execute a function when the user presses a key on the keyboard
+    input.addEventListener("keypress", function (event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            document.getElementById("search-btn").click();
+        }
+    });
+</script>

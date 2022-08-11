@@ -1,0 +1,100 @@
+﻿@model List<QuanLyBanHang.Models.CartItem>
+@using QuanLyBanHang.Models;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var total = Model.Sum(x => x.Price * x.Quantity);
+}
+
+@{ Html.RenderAction("SearchBar", "Home");}
+<section class="shoping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="shoping__product">Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ foreach (CartItem item in Model)
+                                {
+                                <tr>
+                                    <td class="shoping__cart__item d-flex align-items-center">
+                                        <img style="width:100px; height:100px;object-fit:cover;" src="@item.Product.Images.Where(x=>x.IsPrimary==true).FirstOrDefault().ImageUrl" alt="">
+                                        <h5>@item.Product.Title</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        @string.Format("{0:#,##0}", Convert.ToDecimal(item.Price)) &#8363;
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input class="item-quantity" id="@item.Product.Id" type="text" value="@item.Quantity">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        @string.Format("{0:#,##0}", Convert.ToDecimal(item.Price * item.Quantity)) &#8363;
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                        <span class="icon_close"></span>
+                                    </td>
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    <a href="/Product" class="primary-btn cart-btn">Tiếp tục mua hàng</a>
+                    <a href="#" id="btn-update-cart" class="primary-btn cart-btn cart-btn-right">
+                        <span class="icon_loading"></span>
+                        Cập nhật giỏ hàng
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__checkout">
+                    <h5>Tổng tiền giỏ hàng</h5>
+                    <ul>
+                        @*<li>Subtotal <span>$454.98</span></li>*@
+                        <li>
+                            Tổng tiền <span>
+                                @string.Format("{0:#,##0}", Convert.ToDecimal(total)) &#8363;
+                            </span>
+                        </li>
+                    </ul>
+                    <a href="/Checkout" class="primary-btn">THANH TOÁN</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $("#btn-update-cart").on("click", () => {
+        var array = $(".item-quantity").toArray().map((value, index) => ({ ProductId: Number(value.getAttribute("id")), Quantity: Number(value.value) }));
+        $.ajax({
+            url: "Cart/UpdateCart",
+            data: {
+                updates: array
+            },
+            method: "Post",
+            success: function () {
+                window.location.reload()
+            }
+        })
+    })
+</script>

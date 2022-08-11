@@ -1,31 +1,319 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@using QuanLyBanHang.DB.Entities
+@model IEnumerable<QuanLyBanHang.DB.Entities.ProductType>
+<!-- Hero Section Begin -->
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hero__categories">
+                    <div class="hero__categories__all">
+                        <i class="fa fa-bars"></i>
+                        <span>Loại sản phẩm</span>
+                    </div>
+                    <ul>
+                        @foreach (ProductType item in Model)
+                        {
+                            <li><a href="/Product?ProductTypeId=@item.ID">@item.Name</a></li>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="hero__search">
+                    <div class="hero__search__form">
+                        <form id="search-form">
+                            <input type="text" id="search-input" placeholder="Bạn đang cần gì?">
+                            <button type="button" id="search-btn" class="site-btn">Tìm kiếm</button>
+                        </form>
+                    </div>
+                    <div class="hero__search__phone">
+                        <div class="hero__search__phone__icon">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                        <div class="hero__search__phone__text">
+                            <h5>+65 11.188.888</h5>
+                            <span>Hỗ trợ 24/7</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero__item set-bg" data-setbg="/Assets/Client/img/hero/banner.png" style="background-image: url(&quot;/Assets/Client/img/hero/banner.png&quot;);">
+                    <div class="hero__text">
+                        <span>Hàng nhập khẩu</span>
+                        <h2>Đồ điện tử <br><h3 style="font-weight: 600;">100% Chính hãng</h3></h2>
+                        <p>Giao hàng miễn phí tận nơi</p>
+                        <a href="/Product" class="primary-btn">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+<!-- Categories Section Begin -->
+<section class="categories">
+    <div class="container">
+        <div class="row">
+            <div class="categories__slider owl-carousel">
+                @foreach (ProductType item in Model)
+                {
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="@item.PathImage">
+                            <h5><a href="/Product?ProductTypeId=@item.ID">@item.Name</a></h5>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Categories Section End -->
+<!-- Featured Section Begin -->
+@{
+    Html.RenderAction("FeaturedProduct", "Product");
+}
+<!-- Featured Section End -->
+<!-- Banner Begin -->
+<div class="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="banner__pic">
+                    <img src="/Assets/Client/img/banner/banner-1.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="banner__pic">
+                    <img src="/Assets/Client/img/banner/banner-2.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Banner End -->
+<!-- Latest Product Section Begin -->
+<section class="latest-product spad">
+    <div class="container">
+        <div class="row">
+            @{Html.RenderAction("SubListProduct", "Product");}
+            @*            <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Latest Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Top Rated Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="latest-product__text">
+                        <h4>Review Products</h4>
+                        <div class="latest-product__slider owl-carousel">
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="latest-prdouct__slider__item">
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-1.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-2.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="latest-product__item">
+                                    <div class="latest-product__item__pic">
+                                        <img src="~/Assets/Client/img/latest-product/lp-3.jpg" alt="">
+                                    </div>
+                                    <div class="latest-product__item__text">
+                                        <h6>Crab Pool Security</h6>
+                                        <span>$30.00</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</section>
+<!-- Latest Product Section End -->
+<script>
+    $('.site-btn').on('click', function () {
+            let keyword = $('#search-input').val();
+            var url ="@Url.Action("index","product",new {keyword = "__keyword__" })"
+            window.location.href = url.replace('__keyword__', keyword);
+    })
+    var input = document.getElementById("search-input");
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    // Execute a function when the user presses a key on the keyboard
+    input.addEventListener("keypress", function (event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            document.getElementById("search-btn").click();
+        }
+    });
+</script>

@@ -29,6 +29,11 @@
 
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <title>ADMIN</title>
+    <style>
+        td {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -49,14 +54,14 @@
                     <a class="nav-link dropdown-toggle text-secondary " href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
-                        @if (Session["HoTenNV"] !=null)
+                        @if (Session["HoTenNV"] != null)
                         {
-                            @Session["HoTenNV"].ToString()
+                        @Session["HoTenNV"].ToString()
                         }
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark my-2">
                         <li>
-                            @Html.ActionLink("Thông tin tài khoản", "Edit", "Home", new { id = Session["IDNV"] }, new { @class = "dropdown-item py-2" })
+                            @Html.ActionLink("Thông tin tài khoản", "Details", "Users", new { id = Session["IDNV"] }, new { @class = "dropdown-item py-2" })
                         </li>
                         <li>
                             <a href="/admin/login/logout" class="dropdown-item py-2">Đăng xuất</a>
@@ -91,27 +96,38 @@
                             <div class="collapse" id="collapseExample">
                                 <ul class="navbar-dark">
                                     <li class="navbar-nav">
-                                        <a href="/admin/user" class="nav-link">
+                                        <a href="/admin/users" class="nav-link">
                                             <i class="bi bi-person-circle"></i>
                                             Người dùng
                                         </a>
                                     </li>
 
-
                                     <li class="navbar-nav">
-                                        <a href="/admin/role" class="nav-link">
-                                            <i class="bi bi-people-fill"></i>
+                                        <a href="/admin/products" class="nav-link">
+                                            <i class="bi bi-box-seam"></i>
                                             Sản phẩm
                                         </a>
                                     </li>
                                     <li class="navbar-nav">
-                                        <a href="/admin/role" class="nav-link">
-                                            <i class="bi bi-people-fill"></i>
+                                        <a href="/admin/productTypes" class="nav-link">
+                                            <i class="bi bi-tag-fill"></i>
+                                            Loại Sản phẩm
+                                        </a>
+                                    </li>
+                                    <li class="navbar-nav">
+                                        <a href="/admin/categories" class="nav-link">
+                                            <i class="bi bi-bookmarks"></i>
                                             Danh mục sản phẩm
                                         </a>
                                     </li>
                                     <li class="navbar-nav">
-                                        <a href="/admin/role" class="nav-link">
+                                        <a href="/admin/suppliers" class="nav-link">
+                                            <i class="bi bi-house-fill"></i>
+                                            Nhà cung cấp
+                                        </a>
+                                    </li>
+                                    <li class="navbar-nav">
+                                        <a href="/admin/deliveryEmployees" class="nav-link">
                                             <i class="bi bi-people-fill"></i>
                                             Nhân viên giao hàng
                                         </a>
@@ -122,181 +138,17 @@
                         <li class="sidebar-item">
                             <hr class="dropdown-divider">
                         </li>
-                        
-
-                        <!-- sidebar item 1 end -->
-
-                            <!-- sidebar item 2 start-->
+                        <!-- sidebar item 2 end-->
+                        <!-- sidebar item 3 start-->
                         <li class="sidebar-item">
-                            <a data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false"
-                               aria-controls="collapseExample2" class="nav-link d-flex align-items-center sidebar-link">
-                                <span class="me-2">
-                                    <i class="bi bi-boxes"></i>
-                                </span>
-                                Quản lý kho lưu trữ
-                                <span class="icon-right ms-auto d-flex">
-                                    <i class="bi bi-chevron-down "></i>
-                                </span>
-                            </a>
-                            <div class="collapse" id="collapseExample2">
-                                <ul class="navbar-dark">
-                                    <li class="navbar-nav">
-
-                                        <a href="/admin/storage" class="nav-link">
-                                            <i class="bi bi-archive"></i>
-                                            Quản lý kho lưu trữ
-                                        </a>
-
-                                        <a href="/admin/stack" class="nav-link">
-                                            <i class="bi bi-stack"></i>
-                                            Quản lý ngăn lưu trữ
-                                        </a>
-                                            
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-item">
-                            <hr class="dropdown-divider">
-                        </li>
- <!-- sidebar item 2 end-->
-
-                            <!-- sidebar item 3 start-->
-                        <li class="sidebar-item">
-                            <a href="/admin/category" class="nav-link">
-                                <i class="bi bi-stack"></i>
-                                Quản lý danh mục hồ sơ
+                            <a href="/admin/orders" class="nav-link">
+                                <i class="bi bi-bag-fill"></i>
+                                Quản lý đơn hàng
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <hr class="dropdown-divider">
                         </li>
- <!-- sidebar item 3 end-->
-                        
-
-
-                            <!-- sidebar item 4 start-->
-                        @*                            <li class="sidebar-item">
-                                <a data-bs-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false"
-                                   aria-controls="collapseExample4" class="nav-link d-flex align-items-center sidebar-link">
-                                    <span class="me-2">
-                                        <i class="fa-solid fa-file-pen"></i>
-                                    </span>
-                                    Quản lý hồ sơ lưu trữ
-                                    <span class="icon-right ms-auto d-flex">
-                                        <i class="bi bi-chevron-down "></i>
-                                    </span>
-                                </a>
-                                <div class="collapse" id="collapseExample4">
-                                    <ul class="navbar-dark">
-                                        <li class="navbar-nav">
-                                            <a href="/admin/HoSoLT" class="nav-link">
-                                                <i class="fa-solid fa-file-arrow-down"></i>
-                                                Hồ sơ lưu trữ
-                                            </a>
-                                            <a href="/admin/HoSoHT" class="nav-link">
-                                                <i class="fa-solid fa-file-export"></i>
-                                                Hồ sơ hình thành
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>*@
-
-                        <li class="sidebar-item">
-                            <a href="/admin/HoSoLT" class="nav-link">
-                                <span class="me-2">
-                                    <i class="fa-solid fa-file-pen"></i>
-                                </span>
-                                Quản lý hồ sơ lưu trữ
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <hr class="dropdown-divider">
-                        </li>
- <!-- sidebar item 4 end-->
-                        
-
-                        <!-- sidebar item 5 start-->
-                        <li class="sidebar-item">
-                            <a data-bs-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false"
-                               aria-controls="collapseExample5" class="nav-link d-flex align-items-center sidebar-link">
-                                <span class="me-2">
-                                    <i class="fa-solid fa-file-circle-exclamation"></i>
-                                </span>
-                                Duyệt hồ sơ
-                                <span class="icon-right ms-auto d-flex">
-                                    <i class="bi bi-chevron-down "></i>
-                                </span>
-                            </a>
-                            <div class="collapse" id="collapseExample5">
-                                <ul class="navbar-dark">
-                                    <li class="navbar-nav">
-                                        <a href="" class="nav-link">
-                                            <i class="fa-solid fa-file-circle-plus"></i>
-                                            Hồ sơ gửi duyệt
-                                        </a>
-                                        <a href="" class="nav-link">
-                                            <i class="fa-solid fa-file-circle-check"></i>
-                                            Hồ sơ đã duyệt
-                                        </a>
-                                        <a href="" class="nav-link">
-                                            <i class="fa-solid fa-file-circle-xmark"></i>
-                                            Hồ sơ hủy duyệt
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-item">
-                            <hr class="dropdown-divider">
-                        </li>
-                        <!-- sidebar item 5 end-->
-                        <!-- sidebar item 6 start-->
-                        <li class="sidebar-item">
-                            <a data-bs-toggle="collapse" href="#collapseExample6" role="button" aria-expanded="false"
-                               aria-controls="collapseExample6" class="nav-link d-flex align-items-center sidebar-link">
-                                <span class="me-2">
-                                    <i class="fa-solid fa-newspaper"></i>
-                                </span>
-                                Tin tức
-                                <span class="icon-right ms-auto d-flex">
-                                    <i class="bi bi-chevron-down "></i>
-                                </span>
-                            </a>
-                            <div class="collapse" id="collapseExample6">
-                                <ul class="navbar-dark">
-                                    <li class="navbar-nav">
-                                        <a href="" class="nav-link">
-                                            <i class="fa-solid fa-newspaper"></i>
-                                            Quản lý tin tức
-                                        </a>
-                                        <a href="" class="nav-link">
-                                            <i class="fa-solid fa-message"></i>
-                                            Chủ đề tin tức
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="sidebar-item">
-                            <hr class="dropdown-divider">
-                        </li>
-                        <!-- sidebar item 6 end-->
-                        <!-- sidebar item 7 start-->
-                        <li class="sidebar-item">
-                            <a data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false"
-                               aria-controls="collapseExample2" class="nav-link d-flex align-items-center sidebar-link">
-                                <span class="me-2">
-                                    <i class="fa-solid fa-screwdriver-wrench"></i>
-                                </span>
-                                Chỉnh sửa trang chủ
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <hr class="dropdown-divider">
-                        </li>
-                        <!-- sidebar item 7 end-->
                     </ul>
                 </nav>
             </div>
@@ -304,7 +156,11 @@
     </section>
 
     <!-- offcanvas end -->
-    @RenderBody()
+    <main>
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </main>
     <!-- footer start -->
     <footer class="navbar navbar-dark bg-dark ">
         <div class="container-fluid">
@@ -354,3 +210,4 @@
 </html>
 
 @*@Scripts.Render("~/bundles/jqueryval")*@
+@RenderSection("scripts", required: false)

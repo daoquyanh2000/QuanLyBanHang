@@ -19,10 +19,7 @@
                 showHideTransition: 'slide',
             })
             if (res.status == true) {
-                setTimeout(function () {
-                    window.location = '/Admin/Home';
-                }, 2000);
-
+                window.location = '/Admin/Home';
             }
         }
     })

@@ -2,12 +2,10 @@
 using PagedList;
 using QuanLyBanHang.Dao;
 using QuanLyBanHang.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace QuanLyBanHang.Areas.Admin.Controllers
@@ -28,9 +26,8 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                           select nv;
             ViewBag.search = keyword;
             var model = results.ToPagedList(pageNumber, pageSizeNumber);
-            return View( model);
+            return View(model);
         }
-
 
         public ActionResult Create()
         {
@@ -39,10 +36,11 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
                  new SelectListItem{ Value="0",Text="Khóa"},
                  new SelectListItem{ Value="1",Text="Mở"},
              };
-            myList  =data.ToList();
+            myList = data.ToList();
             Session["listTrangThai"] = myList;
             return View();
         }
+
         [HttpPost]
         public ActionResult Create(NhanVien nv)
         {
@@ -66,6 +64,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             var user = Stuff.GetByID<NhanVien>(id);
             return View(user);
         }
+
         [HttpPost]
         public ActionResult Edit(NhanVien nv)
         {
@@ -76,6 +75,7 @@ namespace QuanLyBanHang.Areas.Admin.Controllers
             ViewBag.Message = "Lưu thành công";
             return View();
         }
+
         public ActionResult Delete(long id)
         {
             var user = Stuff.GetByID<NhanVien>(id);

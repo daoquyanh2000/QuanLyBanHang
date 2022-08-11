@@ -1,0 +1,110 @@
+﻿@model QuanLyBanHang.DB.Entities.Product
+@using QuanLyBanHang.DB.Entities;
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var quantity = 1;
+    var price = Model.Price * (1 - (double)Model.Discount / 100);
+}
+@{ Html.RenderAction("SearchBar", "Home");}
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img style="width:100%;max-height:600px;object-fit:cover" class="product__details__pic__item--large"
+                             src="@Model.Images.Where(img => img.IsPrimary == true).First().ImageUrl" alt="">
+                    </div>
+                    <div class="product__details__pic__slider owl-carousel">
+                        @{ foreach (var image in Model.Images.ToList())
+                            {
+                                <img style="width:100px;height:100px;object-fit:cover" data-imgbigurl="@image.ImageUrl"
+                                     src="@image.ImageUrl" alt="">
+
+                            }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>@Model.Title</h3>
+                    @{ if (Model.Discount > 0)
+                        {
+                            <div class="product__details__price">
+                                <span style="text-decoration:line-through;font-weight:400">@string.Format("{0:#,##0}", Convert.ToDecimal(Model.Price)) &#8363;</span>
+                                <span style="padding-left:5px ;color:red">@string.Format("{0:#,##0}", Convert.ToDecimal(price))&#8363;</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="product__details__price">@string.Format("{0:#,##0}", Convert.ToDecimal(Model.Price)) &#8363;</div>
+                        }
+                    }
+                    <p>
+                        @Model.Info
+                    </p>
+                    <div class="product__details__quantity">
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <input id="quantity" type="text" value="@quantity">
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="primary-btn disabled" id="add-to-cart">Thêm vào giỏ hàng</a>
+
+                    <ul>
+                        <li><b>Tồn kho</b> <span>@Model.Stock</span></li>
+                        <li><b>Xuất xứ</b> <span>@Model.Origin</span></li>
+                        <li>
+                            <b>Chia sẻ</b>
+                            <div class="share">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                               aria-selected="true">Mô tả</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Thông tin sản phẩm</h6>
+                                <p>@Model.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $("#add-to-cart").on("click", () => {
+        if (@Model.Stock== 0) {
+            alert("Đã hết hàng!")
+            return false;
+        }
+        let quantity = $("#quantity").val()
+        $.ajax({
+            url: "/Cart/AddItem?ProductId=@Model.Id&quantity=" + quantity,
+            method: "POST",
+            success: function () {
+                window.location= "/Cart"
+            }
+        })
+    })
+</script>

@@ -1,0 +1,96 @@
+﻿@model QuanLyBanHang.DB.Entities.ProductType
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm mới</h2>
+
+@using (Html.BeginForm("Create", "ProductTypes", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Loại sản phẩm</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Status, "", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Info, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Info, new { @class = "form-control", @rows = 10 })
+            @Html.ValidationMessageFor(model => model.Info, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputImage" id="inputImageLabel">Tải ảnh</label>
+        <input type="file" name="file" class="form-control" id="inputImage" accept="image/png, image/gif, image/jpeg">
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <table class="table" id="tableImage">
+            </table>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Tạo" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $('#inputImage').on('change', function () {
+        let html = `
+                    <thead>
+                    <tr>
+                        <th>
+                            Tên ảnh
+                        </th>
+                        <th>
+                            Ảnh
+                        </th>
+                    </tr>
+                    </thead>
+`;
+
+        files = $(this)[0].files;
+        for (let i = 0; i < files.length; i++) {
+            let url = URL.createObjectURL(files[i]);
+            html += `
+                    <tr>
+                        <td>
+                            ${files[i].name}
+                        </td>
+                        <td>
+                            <img src="${url}" alt="Alternate Text" style="width:100px" />
+                        </td>
+                    </tr>`
+        }
+        $(html).wrap('<tbody></tbody>')
+        $('#tableImage').html(html);
+    })
+</script>

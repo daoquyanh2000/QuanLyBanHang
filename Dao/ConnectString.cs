@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 
 namespace QuanLyBanHang.Dao
 {
@@ -10,7 +6,7 @@ namespace QuanLyBanHang.Dao
     {
         public static string Setup()
         {
-            return ConfigurationManager.ConnectionStrings["qapc"].ConnectionString;
+            return ConfigurationManager.ConnectionStrings["StoreContext"].ConnectionString;
         }
     }
 }
